@@ -249,7 +249,7 @@ public class equalsIgnoreCase {
 두개의 String의 값을 대소문자를 무시하고  같으면 true, 다르면 false를 반환한다.
 
 <br>
-<br>
+<br>     
 
 ### byte getBytes()
 
