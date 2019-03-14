@@ -153,7 +153,7 @@ import java.util.Comparator;
 class MyComparator implements Comparator<Point> {
 	@Override
 	public int compare(Point p1, Point p2) {
-		if (p2.x > p1.x) {
+		if (p1.x < p2.x) {
 			return 1;
 		}else if(p2.x < p1.x){ 
 			return -1;
