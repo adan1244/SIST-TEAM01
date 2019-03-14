@@ -66,6 +66,9 @@ class Point implements Comparable<Point> {
 */
 ```
 
+<br>
+<br>
+
 # Interface Comparator<T>
 
 ### 정의
@@ -88,6 +91,7 @@ java.util.Comparator
 3. 첫 번째 파라미터로 넘어온 객체 > 두 번째 파라미터로 넘어온 객체: 양수 리턴
 4. 음수 또는 0이면 객체의 자리가 그대로 유지되고 양수이면 두 객체의 자리가 변경된다
 5. 비교하는 첫번째 객체의 위치에 따라 오름차순 내림차순으로 정렬할 수 있다
+<br>
 
 ### 정렬하기
 
@@ -114,6 +118,7 @@ public class Main {
 
 }
 ```
+<br>
 
 오름차순 정렬
 
@@ -137,6 +142,8 @@ class MyComparator implements Comparator<Point> {
 //java.awt.Point[x=30,y=20]
 //java.awt.Point[x=40,y=30]
 ```
+<br>
+
 내림차순 정렬
 
 ```java
@@ -159,6 +166,8 @@ class MyComparator implements Comparator<Point> {
 //java.awt.Point[x=30,y=20]
 //java.awt.Point[x=20,y=10]
 ```
+<br>
+
 익명클래스 이용
 
 ```java
