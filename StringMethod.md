@@ -274,6 +274,9 @@ public class Test {
 ### byte getBytes(String charsetName)
 
 ```java
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+
 public class Test {
 
    public static void main(String args[]) {
@@ -303,6 +306,8 @@ public class Test {
 ### void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)
 
 ```java
+import java.util.Arrays;
+
 public class Test {
 
    public static void main(String args[]) {
