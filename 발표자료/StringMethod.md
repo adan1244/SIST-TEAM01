@@ -410,7 +410,7 @@ public class Test {
    public static void main(String args[]) {
         String s1 = "start";
         int sidx1 = s1.indexOf('t');
-        int sidx2 = s1.indexOf('t', 2);
+        int sidx2 = s1.indexOf('t', 2);  
 
         System.out.printf("%d %d %n", sidx1, sidx2);
    }
