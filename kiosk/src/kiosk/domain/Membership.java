@@ -4,7 +4,7 @@ public class Membership {
 	private String phone;
 	private int point;
 	
-	Membership() {}
+	public Membership() {}
 	
 	Membership(String phone, int point) {
 		this.phone = phone;
