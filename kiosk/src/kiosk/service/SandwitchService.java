@@ -39,10 +39,7 @@ public class SandwitchService {
 			System.out.println("           서브웨이 무인 주문기                ");
 			System.out.println("==================================");
 			System.out.println(" 품목번호  품목명   가격");
-			System.out.println(" 1        에그마요  5,000    ");
-			System.out.println(" 2        풀드포크  4,000    ");
-			System.out.println(" 3         터키      5,500    ");
-			System.out.println(" 4         쉬림프    6,000    ");
+			List<Item> item = this.dao.listItem("sandwitch");
 			System.out.println("----------------------------------");
 			System.out.println("선택 : ");
 			int sandchoice = sc.nextInt();
@@ -62,10 +59,7 @@ public class SandwitchService {
 			System.out.println("               빵선택                          ");
 			System.out.println("==================================");
 			System.out.println("번호  이름");
-			System.out.println("1      플랫");
-			System.out.println("2     화이트");
-			System.out.println("3    허니오트");
-			System.out.println("4     파마산");
+			List<Item> item = this.dao.listItem("bread");
 			System.out.println("----------------------------------");
 			System.out.println("선택 : ");
 			int breadchoice = sc.nextInt();
@@ -83,6 +77,7 @@ public class SandwitchService {
 			System.out.println("==================================");
 			System.out.println("              야채선택                         ");
 			System.out.println("==================================");
+			List<Item> item = this.dao.listItem("vegetable");
 			System.out.println("6 선택완료");
 			System.out.println("----------------------------------");
 			System.out.println("제외할 야채의 번호를 선택해주세요");
@@ -102,9 +97,8 @@ public class SandwitchService {
 			System.out.println("==================================");
 			System.out.println("              소스선택                         ");
 			System.out.println("==================================");
-			System.out.println();
-			System.out.println();
 			System.out.println("번호  이름");
+			List<Item> item = this.dao.listItem("sauce");
 			System.out.println("7 선택완료");
 			System.out.println("----------------------------------");
 			System.out.println("선택 : ");
