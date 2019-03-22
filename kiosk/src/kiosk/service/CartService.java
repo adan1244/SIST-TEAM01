@@ -123,10 +123,11 @@ public class CartService {
 						//System.out.printf("총 %d원 결제되었습니다. %n", 총금액);
 						//int point = 총금액 * 0.1 + membership.getPoint();
 						int point = 0;
+						System.out.printf("%d 포인트 적립", point);
+						
 						membership.setPoint(point);
 						this.bill(point);
 						
-						System.out.printf("%d 포인트 적립", point);
 						break;
 					}
 				}
@@ -138,7 +139,7 @@ public class CartService {
 	//포인트 사용 결제
 	public void pay3(Scanner sc) {
 		int point = membership.getPoint();
-		this.bill(point);
+		this.bill(point);	
 	}
 	
 	//영수증 출력
