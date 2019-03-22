@@ -40,12 +40,13 @@ public class Main {
 			}
 			
 		}
-		
+		   
 		sc.close();
 		System.out.println("프로그램 종료");
 	}
 
 	}
  
+
 
 
