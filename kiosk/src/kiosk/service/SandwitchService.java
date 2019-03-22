@@ -93,7 +93,8 @@ public class SandwitchService {
 			System.out.println("선택 : ");
 			int vegechoice = sc.nextInt();
 			sc.nextLine();
-			if (vegechoice == 0) break;
+			if (vegechoice == 0||vegechoice == 6) break;
+			
 		}
 		return null;
 	}
@@ -113,7 +114,7 @@ public class SandwitchService {
 			System.out.println("선택 : ");
 			int saucechoice = sc.nextInt();
 			sc.nextLine();
-			if (saucechoice == 0) break;
+			if (saucechoice == 0 || saucechoice == 7) break;
 			System.out.println();
 			System.out.println("샌드위치 수량 : ");
 			int sandchoice = sc.nextInt();
