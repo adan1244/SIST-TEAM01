@@ -36,7 +36,7 @@ public class AdminService {
 	
 	//서브웨이 메뉴 관리 - 신 메뉴 추가
 	private void itemAdd(Scanner sc) {
-		
+	
 	}
 	
 	//서브웨이 메뉴 관리 - 기존 메뉴 삭제
