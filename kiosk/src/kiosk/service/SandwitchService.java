@@ -1,5 +1,8 @@
 package kiosk.service;
 
+import kiosk.domain.Item;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import kiosk.dao.KioskDAO;
@@ -20,17 +23,16 @@ public class SandwitchService {
 	
 	// 메인메뉴 주문
 	public void menu1(Scanner sc) {
-		while(true) {
-			this.topping(sc);
-			this.bread(sc);
-			this.vegetable(sc);
-			this.sauce(sc);
-			
-			}
+		List<Item> list =new ArrayList<Item>();
+		list.add(this.sandwitch(sc));
+		list.add(this.bread(sc));
+		list.add(this.vegetable(sc));
+		list.add(this.sauce(sc));
+		
 	}
 	
-	// 토핑선택
-	public String topping(Scanner sc) {
+	// 샌드위치 선택
+	public Item sandwitch(Scanner sc) {
 		String topping = null;
 		while (true) {
 			System.out.println("뒤로가기 = 0");
@@ -48,11 +50,13 @@ public class SandwitchService {
 			sc.nextLine();
 
 			if (sandchoice == 0) break;
+			
 		}
-		return topping;
+		return null;
+		
 	}
 
-	public String bread(Scanner sc) {
+	public Item  bread(Scanner sc) {
 		String bread = "b";
 		while (true) {
 			System.out.println("뒤로가기 = 0");
@@ -70,12 +74,13 @@ public class SandwitchService {
 			sc.nextLine();
 			if (breadchoice == 0) break;
 		}
-		return bread;
+		
+		return null;
 		
 	}
 	
 	// 야채선택
-	public String vegetable(Scanner sc) {
+	public Item  vegetable(Scanner sc) {
 		String vege = "v";
 		while (true) {
 			System.out.println("뒤로가기 = 0");
@@ -90,11 +95,11 @@ public class SandwitchService {
 			sc.nextLine();
 			if (vegechoice == 0) break;
 		}
-		return vege;
+		return null;
 	}
 	
 	// 소스선택
-	public String sauce(Scanner sc) {
+	public Item sauce(Scanner sc) {
 		String suace = "s";
 		while(true) {
 			System.out.println("뒤로가기 = 0");
@@ -114,6 +119,6 @@ public class SandwitchService {
 			int sandchoice = sc.nextInt();
 			sc.nextLine();
 		}
-		return suace;
+		return null;
 	}
 }
