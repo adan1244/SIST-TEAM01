@@ -2,12 +2,12 @@ package kiosk.service;
 
 import java.util.Scanner;
 
-import kiosk.dao.KioskDAO;
+import kiosk.dao.*;
 import kiosk.domain.Membership;
 import kiosk.domain.Order;
 
 public class CartService {
-	private KioskDAO dao = new KioskDAO();
+	private KioskDAO dao;
 	private Order order = new Order();
 	private Membership membership = new Membership();
 	
@@ -90,6 +90,7 @@ public class CartService {
 	//일반 카드 결제
 	public void pay1(Scanner sc) {
 		while(true) {
+			System.out.println();
 			System.out.print("카드번호 : ");
 			String cardNum = sc.nextLine();
 			
@@ -107,6 +108,7 @@ public class CartService {
 	//포인트 적립 결제 
 	public void pay2(Scanner sc) {
 		while(true) {
+			System.out.println();
 			System.out.print("카드   번호 : ");
 			String cardNum = sc.nextLine();
 			
@@ -139,8 +141,45 @@ public class CartService {
 	//포인트 사용 결제
 	public void pay3(Scanner sc) {
 		int point = membership.getPoint();
-		this.bill(point);	
-	}
+		
+		while(true) {
+			System.out.println();
+			System.out.print("핸드폰 번호 : ");
+			String phoneNum = sc.nextLine();
+			
+			if(phoneNum.length() != 13) {
+				System.out.println("유효하지 않은 핸드폰 번호입니다.");
+			}else {
+				System.out.printf("적립된 포인트 %d원", point);
+				System.out.println("사용할 포인트 : ");
+				int usePoint = sc.nextInt();
+				sc.nextLine();
+				
+				if(usePoint > point) {
+					System.out.println("적립된 포인트 범위를 벗어났습니다.");
+				}else {
+					membership.setPoint(point - usePoint);
+					//System.out.printf("남은 결제 금액 : %d", 총 금액 - usepoint);
+					break;
+				}
+			}
+		}
+		
+		while(true) {
+			System.out.println();
+			System.out.print("카드번호 : ");
+			String cardNum = sc.nextLine();
+			
+			if(cardNum.length() != 19) {
+				System.out.println("유효하지 않은 카드 번호입니다.");
+			}else {
+				//System.out.printf("총 %d원 결제되었습니다. %n", 총금액);
+				this.bill(membership.getPoint());
+				break;
+			}
+		}
+		
+	}  
 	
 	//영수증 출력
 	public void bill(int point) {
@@ -150,6 +189,7 @@ public class CartService {
 		//System.out.println(order.getItem());
 		System.out.println("==================================");
 		//System.out.printf("총    액 : %d", 총 금액);
+		//System.out.println("포인트 사용 : %d");
 		System.out.println("==================================");
 		//System.out.printf("결제금액 : %d", 총 금액);
 		System.out.println("==================================");
