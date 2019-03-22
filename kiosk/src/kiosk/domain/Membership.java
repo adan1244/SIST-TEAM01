@@ -6,7 +6,7 @@ public class Membership {
 	
 	public Membership() {}
 	
-	Membership(String phone, int point) {
+	public Membership(String phone, int point) {
 		this.phone = phone;
 		this.point = point;
 	}
