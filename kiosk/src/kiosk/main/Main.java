@@ -6,14 +6,17 @@ import kiosk.service.AdminService;
 import kiosk.service.CartService;
 import kiosk.service.SandwitchService;
 import kiosk.service.SideDishService;
+import kiosk.dao.KioskDAO;;
 
 public class Main {
 
 	public static void main(String[] args) {
-		SandwitchService sandwitch = new SandwitchService();
-		SideDishService sideDish = new SideDishService();	
-		CartService cart = new CartService();	
-		AdminService admin = new AdminService();	
+		KioskDAO dao = new KioskDAO();
+		
+		SandwitchService sandwitch = new SandwitchService(dao);
+		//SideDishService sideDish = new SideDishService(dao);	
+		//CartService cart = new CartService(dao);	
+		AdminService admin = new AdminService(dao);	
         Scanner sc = new Scanner(System.in);
 
 		while (true) {
