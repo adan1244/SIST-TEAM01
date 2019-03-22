@@ -145,13 +145,13 @@ public class AdminService {
 				break;
 			}
 			else {
-				this.oneMonth(sc, list);
+				this.oneMonth(sc);
 			}
 		}
 	}
 	
 	//99.관리자메뉴 - 3.월말결산 - 선택한 달 결산
-	private void oneMonth(Scanner sc, List<Order> list) {
+	private void oneMonth(Scanner sc) {
 		
 	}
 }
