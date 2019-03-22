@@ -25,15 +25,14 @@ public class SandwitchService {
 	public void menu1(Scanner sc) {
 		List<Item> list =new ArrayList<Item>();
 		list.add(this.sandwitch(sc));
-		list.add(this.bread(sc));
-		list.add(this.vegetable(sc));
-		list.add(this.sauce(sc));
+		if (this.sandwitch(sc)!=null) list.add(this.bread(sc));
+		if (this.bread(sc)!=null) list.add(this.vegetable(sc));
+		if (this.vegetable(sc)!=null) list.add(this.sauce(sc));
 		
 	}
 	
 	// 샌드위치 선택
 	public Item sandwitch(Scanner sc) {
-		String topping = null;
 		while (true) {
 			System.out.println("뒤로가기 = 0");
 			System.out.println("==================================");
@@ -56,8 +55,7 @@ public class SandwitchService {
 		
 	}
 
-	public Item  bread(Scanner sc) {
-		String bread = "b";
+	public Item bread(Scanner sc) {
 		while (true) {
 			System.out.println("뒤로가기 = 0");
 			System.out.println("==================================");
@@ -75,13 +73,11 @@ public class SandwitchService {
 			if (breadchoice == 0) break;
 		}
 		
-		return null;
-		
+		return null;	
 	}
 	
 	// 야채선택
 	public Item  vegetable(Scanner sc) {
-		String vege = "v";
 		while (true) {
 			System.out.println("뒤로가기 = 0");
 			System.out.println("==================================");
@@ -101,13 +97,13 @@ public class SandwitchService {
 	
 	// 소스선택
 	public Item sauce(Scanner sc) {
-		String suace = "s";
 		while(true) {
 			System.out.println("뒤로가기 = 0");
 			System.out.println("==================================");
 			System.out.println("              소스선택                         ");
 			System.out.println("==================================");
-			System.out.println();System.out.println();
+			System.out.println();
+			System.out.println();
 			System.out.println("번호  이름");
 			System.out.println("7 선택완료");
 			System.out.println("----------------------------------");
