@@ -15,7 +15,7 @@ public class Main {
 		
 		SandwitchService sandwitch = new SandwitchService(dao);
 		//SideDishService sideDish = new SideDishService(dao);	
-		//CartService cart = new CartService(dao);	
+		CartService cart = new CartService(dao);	
 		AdminService admin = new AdminService(dao);	
         Scanner sc = new Scanner(System.in);
 
@@ -38,7 +38,7 @@ public class Main {
 			switch (m) {
 			case 1: sandwitch.menu1(sc); break;
 			//case 2: sideDish.menu2(sc); break;
-			//case 3: cart.menu3(sc); break;
+			case 3: cart.menu3(sc); break;
 			case 99: admin.menu99(sc); break;
 			}
 			
