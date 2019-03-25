@@ -1,5 +1,6 @@
 package kiosk.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubOrder {
