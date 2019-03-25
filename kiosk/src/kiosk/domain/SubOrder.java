@@ -40,4 +40,16 @@ public class SubOrder {
 		tmp = tmp * count;
 		this.price = tmp;
 	}
+	
+	// 품목이름 품목이름 ... 품목이름 수량 가격 형식으로 문자열 반환
+	@Override
+	public String toString() {
+		String tmp = new String();
+		for(Item i : item) {
+			tmp.concat(i.getName() + " ");
+		}
+		tmp.concat(this.count + " ");
+		tmp.concat(this.price + "");
+		return tmp;
+	}
 }
