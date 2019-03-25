@@ -174,17 +174,14 @@ public class AdminService {
 		int count = 0;
 		
 		System.out.println("가테고리 종류 중 하나를 선택하세요");
-		System.out.println("-> 1.샌드위치, 2.빵, 3.야채, 4.소스, 5.사이드");
+		System.out.println("-> 1.샌드위치, 2.사이드");
 		System.out.print("선택 : ");
 		category = sc.nextInt();
 		sc.nextLine();
 		
 		switch(category) {
 		case 1: categoryName = "샌드위치"; categoryId = "SA"; break;
-		case 2: categoryName = "빵"; categoryId = "BR"; break;
-		case 3: categoryName = "야채"; categoryId = "VE"; break;
-		case 4: categoryName = "소스"; categoryId = "SO"; break;
-		case 5: categoryName = "사이드"; categoryId = "SI"; break;
+		case 2: categoryName = "사이드"; categoryId = "SI"; break;
 		}
 		while(true) {
 			System.out.printf("현재 등록된 %s의 종류", categoryName);
