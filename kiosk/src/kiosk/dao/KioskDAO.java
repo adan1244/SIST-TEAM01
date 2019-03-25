@@ -77,10 +77,12 @@ public class KioskDAO {
 		}
 	}
 	
+	// 판매 품목 추가
 	public void addItem(Item item) {
 		this.item.add(item);
 	}
 	
+	// 판매 품목 삭제
 	public void deleteItem(String category, String itemName) {
 		for(Item i : item) {
 			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {
