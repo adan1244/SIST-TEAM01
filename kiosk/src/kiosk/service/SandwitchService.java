@@ -72,7 +72,7 @@ public class SandwitchService {
 	
 	// 야채선택
 	public Item  vegetable(Scanner sc) {
-		while (true) {
+		while (true) { 
 			System.out.println("뒤로가기 = 0");
 			System.out.println("==================================");
 			System.out.println("              야채선택                         ");
