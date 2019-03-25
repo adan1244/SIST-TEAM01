@@ -14,6 +14,62 @@ public class KioskDAO {
 	private Order cart = new Order(); // 장바구니에 들어있는 품목 저장
 	private List<Order> order = new ArrayList<Order>(); // 실제 결제된 주문들 저장
 	
+	public KioskDAO() {
+		Item item = new Item("SA","에그마요",5000);
+		this.item.add(item);
+		item = new Item("SA","폴드포크",4000);
+		this.item.add(item);
+		item = new Item("SA","터키",5500);
+		this.item.add(item);
+		item = new Item("SA","쉬림프",6000);
+		this.item.add(item);
+		
+		item = new Item("BR", "플랫", 0);
+		this.item.add(item);
+		item = new Item("BR", "화이트", 0);
+		this.item.add(item);
+		item = new Item("BR", "허니오트", 0);
+		this.item.add(item);
+		item = new Item("BR", "파마산", 0);
+		this.item.add(item);
+		
+		item = new Item("VE", "피망", 0);
+		this.item.add(item);
+		item = new Item("VE", "양파", 0);
+		this.item.add(item);
+		item = new Item("VE", "올리브", 0);
+		this.item.add(item);
+		item = new Item("VE", "할라피뇨", 0);
+		this.item.add(item);
+		item = new Item("VE", "양상추", 0);
+		this.item.add(item);
+		
+		item = new Item("SO", "핫칠리", 0);
+		this.item.add(item);
+		item = new Item("SO", "랜치", 0);
+		this.item.add(item);
+		item = new Item("SO", "스위트어니언", 0);
+		this.item.add(item);
+		item = new Item("SO", "스위트칠리", 0);
+		this.item.add(item);
+		item = new Item("SO", "바베큐", 0);
+		this.item.add(item);
+		item = new Item("SO", "머스타드", 0);
+		this.item.add(item);
+		
+		item = new Item("SI", "음료", 1000);
+		this.item.add(item);
+		item = new Item("SI", "음료 + 쿠키 세트", 1500);
+		this.item.add(item);
+		item = new Item("SI", "쿠키", 1000);
+		this.item.add(item);
+		item = new Item("SI", "과자", 1000);
+		this.item.add(item);
+		item = new Item("SI", "더블미트", 1500);
+		this.item.add(item);
+		item = new Item("SI", "웨지감자", 3000);
+		this.item.add(item);
+	}
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
 	public List<Item> listItem(String category) {
