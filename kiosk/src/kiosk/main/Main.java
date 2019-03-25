@@ -42,11 +42,10 @@ public class Main {
 			case 3: cart.menu3(sc); break;
 			case 99: admin.menu99(sc); break;
 			}
-
-		}
-
 		sc.close();
 		System.out.println("프로그램 종료");
 	}
 
 }
+}
+

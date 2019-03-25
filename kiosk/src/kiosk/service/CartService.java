@@ -19,9 +19,9 @@ public class CartService {
 	}
 	
 	//장바구니(결제) 메뉴
-	public void menu03(Scanner sc) {
+	public void menu3(Scanner sc) {
 		
-		while(true) {
+		while(true) {  
 			int total = 0;
 			int usePoint = 0;
 			
@@ -32,11 +32,12 @@ public class CartService {
 			System.out.println("==================================");
 			
 			Order order = dao.getCart();
-			for(int i =0; i<order.getItem().size(); ++i) {
+			for(int i = 0; i < order.getItem().size(); ++i) {
 				System.out.printf("%d %s %s ", i + 1, order.getItem().get(i), order.getItem().get(i).getCount());
 			}
 			
 			System.out.println("----------------------------------");
+			
 			for(int i =0; i<order.getItem().size(); ++i) {
 				total += order.getItem().get(i).getPrice() * order.getItem().get(i).getCount(); 
 			}
@@ -68,7 +69,7 @@ public class CartService {
 				sc.nextLine();
 				
 				if(payInput == 0) {
-					break;
+					break;   
 				}else if(payInput == 1) {
 					this.pay1(sc, total, usePoint);
 					break;
@@ -203,7 +204,7 @@ public class CartService {
 		System.out.println("==================================");
 		System.out.printf("결제금액 : %d", total - usePoint);
 		System.out.println("==================================");
-		System.out.printf("적 립 금 : %d", point);
+		System.out.printf("적 립 금 : %d", point);	
 	}
 	
 	//주문 삭제 메소드
