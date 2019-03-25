@@ -1,4 +1,4 @@
-package kiosk.service;
+ï»¿package kiosk.service;
 
 import kiosk.domain.Item;
 import java.util.ArrayList;
@@ -11,35 +11,33 @@ public class SandwitchService {
 
 	KioskDAO dao = null;
 
-	// ±âº»»ı¼ºÀÚ
+	// ê¸°ë³¸ìƒì„±ì
 	public SandwitchService() {
 
 	}
 
-	// dao ÃÊ±âÈ­ »ı¼ºÀÚ
+	// dao ì´ˆê¸°í™” ìƒì„±ì
 	public SandwitchService(KioskDAO dao) {
 		this.dao = dao;
 	}
 
-	// ¸ŞÀÎ¸Ş´º ÁÖ¹®
+	// ë©”ì¸ë©”ë‰´ ì£¼ë¬¸
 	public void menu1(Scanner sc) {
-		List<Item> list = new ArrayList<Item>();
-
-		list.add(this.sandwitch(sc));
-		list.add(this.bread(sc));
-		list.add(this.vegetable(sc));
-		list.add(this.sauce(sc));
+		List<Item> list = new ArrayList<Item>(); 
+		this.sandwitch(sc);
+		
 	}
 
-	// »÷µåÀ§Ä¡ ¼±ÅÃ
+	// ìƒŒë“œìœ„ì¹˜ ì„ íƒ
 	public Item sandwitch(Scanner sc) {
+		List<Item> item= new ArrayList<Item>();
 		while (true) {
-			System.out.println("µÚ·Î°¡±â = 0");
+			System.out.println("ë’¤ë¡œê°€ê¸° = 0");
 			System.out.println("==================================");
-			System.out.println("           ¼­ºê¿şÀÌ ¹«ÀÎ ÁÖ¹®±â                ");
+			System.out.println("           ì„œë¸Œì›¨ì´ ë¬´ì¸ ì£¼ë¬¸ê¸°                ");
 			System.out.println("==================================");
-			System.out.println(" Ç°¸ñ¹øÈ£  Ç°¸ñ¸í   °¡°İ");
-			List<Item> item = this.dao.listItem("sandwitch");
+			System.out.println(" í’ˆëª©ë²ˆí˜¸  í’ˆëª©ëª…   ê°€ê²©");
+			item = this.dao.listItem("sandwitch");
 			int number = 1;
 			for (Item i : item) {
 				if (i != null) {
@@ -48,28 +46,31 @@ public class SandwitchService {
 				}
 			}
 			System.out.println("----------------------------------");
-			System.out.println("¼±ÅÃ : ");
+			System.out.print("ì„ íƒ : ");
 			int sandchoice = sc.nextInt();
 			sc.nextLine();
 
-			if (sandchoice == 0)
+			if (sandchoice == 0) 
 				break;
+				this.bread(sc);
 
 		}
+		
+		
 		return null;
 
 	}
 
 	public Item bread(Scanner sc) {
 		while (true) {
-			System.out.println("µÚ·Î°¡±â = 0");
+			System.out.println("ë’¤ë¡œê°€ê¸° = 0");
 			System.out.println("==================================");
-			System.out.println("               »§¼±ÅÃ                          ");
+			System.out.println("               ë¹µì„ íƒ                          ");
 			System.out.println("==================================");
-			System.out.println("¹øÈ£  ÀÌ¸§");
+			System.out.println("ë²ˆí˜¸  ì´ë¦„");
 			List<Item> item = this.dao.listItem("bread");
 			System.out.println("----------------------------------");
-			System.out.println("¼±ÅÃ : ");
+			System.out.print("ì„ íƒ : ");
 			int breadchoice = sc.nextInt();
 			sc.nextLine();
 			if (breadchoice == 0)
@@ -79,18 +80,18 @@ public class SandwitchService {
 		return null;
 	}
 
-	// ¾ßÃ¤¼±ÅÃ
+	// ì•¼ì±„ì„ íƒ
 	public Item vegetable(Scanner sc) {
 		while (true) {
-			System.out.println("µÚ·Î°¡±â = 0");
+			System.out.println("ë’¤ë¡œê°€ê¸° = 0");
 			System.out.println("==================================");
-			System.out.println("              ¾ßÃ¤¼±ÅÃ                         ");
+			System.out.println("              ì•¼ì±„ì„ íƒ                         ");
 			System.out.println("==================================");
 			List<Item> item = this.dao.listItem("vegetable");
-			System.out.println("6 ¼±ÅÃ¿Ï·á");
+			System.out.println("6 ì„ íƒì™„ë£Œ");
 			System.out.println("----------------------------------");
-			System.out.println("Á¦¿ÜÇÒ ¾ßÃ¤ÀÇ ¹øÈ£¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä");
-			System.out.println("¼±ÅÃ : ");
+			System.out.println("ì œì™¸í•  ì•¼ì±„ì˜ ë²ˆí˜¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”");
+			System.out.print("ì„ íƒ : ");
 			int vegechoice = sc.nextInt();
 			sc.nextLine();
 			if (vegechoice == 0 || vegechoice == 6)
@@ -100,24 +101,24 @@ public class SandwitchService {
 		return null;
 	}
 
-	// ¼Ò½º¼±ÅÃ
+	// ì†ŒìŠ¤ì„ íƒ
 	public Item sauce(Scanner sc) {
 		while (true) {
-			System.out.println("µÚ·Î°¡±â = 0");
+			System.out.println("ë’¤ë¡œê°€ê¸° = 0");
 			System.out.println("==================================");
-			System.out.println("              ¼Ò½º¼±ÅÃ                         ");
+			System.out.println("              ì†ŒìŠ¤ì„ íƒ                         ");
 			System.out.println("==================================");
-			System.out.println("¹øÈ£  ÀÌ¸§");
+			System.out.println("ë²ˆí˜¸  ì´ë¦„");
 			List<Item> item = this.dao.listItem("sauce");
-			System.out.println("7 ¼±ÅÃ¿Ï·á");
+			System.out.println("7 ì„ íƒì™„ë£Œ");
 			System.out.println("----------------------------------");
-			System.out.println("¼±ÅÃ : ");
+			System.out.print("ì„ íƒ : ");
 			int saucechoice = sc.nextInt();
 			sc.nextLine();
 			if (saucechoice == 0 || saucechoice == 7)
 				break;
 			System.out.println();
-			System.out.println("»÷µåÀ§Ä¡ ¼ö·® : ");
+			System.out.println("ìƒŒë“œìœ„ì¹˜ ìˆ˜ëŸ‰ : ");
 			int sandchoice = sc.nextInt();
 			sc.nextLine();
 		}
