@@ -12,12 +12,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		KioskDAO dao = new KioskDAO();
-		
+
 		SandwitchService sandwitch = new SandwitchService(dao);
-		//SideDishService sideDish = new SideDishService(dao);	
-		//CartService cart = new CartService(dao);	
-		AdminService admin = new AdminService(dao);	
-        Scanner sc = new Scanner(System.in);
+		// SideDishService sideDish = new SideDishService(dao);
+		CartService cart = new CartService(dao);
+		AdminService admin = new AdminService(dao);
+		Scanner sc = new Scanner(System.in);
 
 		while (true) {
 
@@ -33,12 +33,13 @@ public class Main {
 			int m = sc.nextInt();
 			sc.nextLine();
 
-			if (m == 0) break;
+			if (m == 0)
+				break;
 
 			switch (m) {
 			case 1: sandwitch.menu1(sc); break;
 			//case 2: sideDish.menu2(sc); break;
-			//case 3: cart.menu3(sc); break;
+			case 3: cart.menu3(sc); break;
 			case 99:
 				System.out.print("비밀번호 : ");
 				String pwd = sc.nextLine();
@@ -53,13 +54,10 @@ public class Main {
 			}
 
 		}
-		   
 		sc.close();
 		System.out.println("프로그램 종료");
 	}
 
-	}
- 
-
+}
 
 
