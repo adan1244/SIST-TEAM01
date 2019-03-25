@@ -83,7 +83,7 @@ public class CartService {
 				System.out.printf("총 %d원 결제되었습니다. %n", total);
 				int point = 0;
 				this.bill(point);
-				break;
+				break;  
 			}
 		}
 	}
