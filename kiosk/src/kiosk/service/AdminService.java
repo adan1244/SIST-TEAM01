@@ -1,9 +1,13 @@
 package kiosk.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import kiosk.dao.KioskDAO;
+import kiosk.domain.Item;
 import kiosk.domain.Order;
 
 public class AdminService {
@@ -80,16 +84,144 @@ public class AdminService {
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 1.신 메뉴 추가
 	private void itemAdd(Scanner sc) {
-	
+		List<Item> tmp = null;
+		Item item = null;
+		int category = 0;
+		String categoryId = "";
+		String categoryName = "";
+		
+		System.out.println("가테고리 종류 중 하나를 선택하세요");
+		System.out.println("-> 1.샌드위치, 2.빵, 3.야채, 4.소스, 5.사이드");
+		System.out.print("선택 : ");
+		category = sc.nextInt();
+		sc.nextLine();
+		
+		switch(category) {
+		case 1: categoryName = "샌드위치"; categoryId = "SA"; break;
+		case 2: categoryName = "빵"; categoryId = "BR"; break;
+		case 3: categoryName = "야채"; categoryId = "VE"; break;
+		case 4: categoryName = "소스"; categoryId = "SO"; break;
+		case 5: categoryName = "사이드"; categoryId = "SI"; break;
+		}
+		
+		System.out.printf("현재 등록된 %s의 종류", categoryName);
+		System.out.println();
+		System.out.print("-> ");
+		
+		tmp = this.dao.listItem(categoryId);
+		for(Item l : tmp) {
+			System.out.printf("%s ",l.getName());
+		}
+		System.out.println();
+		
+		System.out.print("추가할 메뉴 이름 : ");
+		String name = sc.nextLine();
+		System.out.print("가격 : ");
+		int price = sc.nextInt();
+		sc.nextLine();
+		
+		item = new Item(categoryId, name, price);
+		this.dao.addItem(item);
+		
+		System.out.println("메뉴가 추가되었습니다.");
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 2.기존 메뉴 삭제
 	private void itemDelete(Scanner sc) {
+		List<Item> tmp = null;
+		int category = 0;
+		String categoryId = "";
+		String categoryName = "";
 		
+		System.out.println("가테고리 종류 중 하나를 선택하세요");
+		System.out.println("-> 1.샌드위치, 2.빵, 3.야채, 4.소스, 5.사이드");
+		System.out.print("선택 : ");
+		category = sc.nextInt();
+		sc.nextLine();
+		
+		switch(category) {
+		case 1: categoryName = "샌드위치"; categoryId = "SA"; break;
+		case 2: categoryName = "빵"; categoryId = "BR"; break;
+		case 3: categoryName = "야채"; categoryId = "VE"; break;
+		case 4: categoryName = "소스"; categoryId = "SO"; break;
+		case 5: categoryName = "사이드"; categoryId = "SI"; break;
+		}
+		
+		System.out.printf("현재 등록된 %s의 종류", categoryName);
+		System.out.println();
+		System.out.print("-> ");
+		
+		tmp = this.dao.listItem(categoryId);
+		for(Item l : tmp) {
+			System.out.printf("%s ",l.getName());
+		}
+		System.out.println();
+		
+		System.out.print("삭제할 메뉴 이름 : ");
+		String name = sc.nextLine();
+		
+		this.dao.deleteItem(categoryId, name);
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 3.기존 메뉴 가격 변경
 	private void changeItemPrice(Scanner sc) {
+		List<Item> tmp = null;
+		Map<String, String> remember1 = new HashMap<String, String>();
+		Map<String, String> remember2 = new HashMap<String, String>();
+		int category = 0;
+		String categoryId = "";
+		String categoryName = "";
+		int count = 0;
+		
+		System.out.println("가테고리 종류 중 하나를 선택하세요");
+		System.out.println("-> 1.샌드위치, 2.빵, 3.야채, 4.소스, 5.사이드");
+		System.out.print("선택 : ");
+		category = sc.nextInt();
+		sc.nextLine();
+		
+		switch(category) {
+		case 1: categoryName = "샌드위치"; categoryId = "SA"; break;
+		case 2: categoryName = "빵"; categoryId = "BR"; break;
+		case 3: categoryName = "야채"; categoryId = "VE"; break;
+		case 4: categoryName = "소스"; categoryId = "SO"; break;
+		case 5: categoryName = "사이드"; categoryId = "SI"; break;
+		}
+		while(true) {
+			System.out.printf("현재 등록된 %s의 종류", categoryName);
+			System.out.println();
+			System.out.println("번호 이름 가격");
+			
+			tmp = this.dao.listItem(categoryId);
+			for(Item l : tmp) {
+				System.out.printf("%2d %s %d",++count, l.getName(), l.getPrice());
+				System.out.println();
+				remember1.put(String.valueOf(count), l.getName());
+				remember2.put(String.valueOf(count), String.valueOf(l.getPrice()));
+			}
+			System.out.printf("%2d 선택완료", ++count);
+			System.out.println();
+			
+			System.out.print("메뉴 번호 : ");
+			String idx = sc.nextLine();
+			
+			if(idx.equals(String.valueOf(count))) break;
+			
+			System.out.printf("기존가격 %s",remember2.get(idx));
+			System.out.println();
+			
+			System.out.print("번경할 가격 : ");
+			int changePrice = sc.nextInt();
+			sc.nextLine();
+			
+			this.dao.changePrice(categoryId, remember1.get(idx), changePrice);
+			
+			System.out.println("가격이 변경되었습니다.");
+			
+			count = 0;
+			remember1.clear();
+			remember2.clear();
+		}
+		
 		
 	}
 	
