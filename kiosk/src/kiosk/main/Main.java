@@ -39,9 +39,19 @@ public class Main {
 			case 1: sandwitch.menu1(sc); break;
 			//case 2: sideDish.menu2(sc); break;
 			//case 3: cart.menu3(sc); break;
-			case 99: admin.menu99(sc); break;
+			case 99:
+				System.out.print("비밀번호 : ");
+				String pwd = sc.nextLine();
+				if(pwd.equals(admin.getpwd())) {
+					admin.menu99(sc);
+					break;
+				}else {
+					System.out.println("비밀번호가 틀렸습니다.");
+					break;
+				}
+					
 			}
-			
+
 		}
 		   
 		sc.close();
