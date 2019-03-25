@@ -69,6 +69,11 @@ public class KioskDAO {
 		this.item.add(item);
 		item = new Item("SI", "웨지감자", 3000);
 		this.item.add(item);
+		
+		//List<Item> listL = new ArrayList<Item>();
+		//SubOrder sub = new SubOrder();
+		//List<SubOrder> listS = new ArrayList<SubOrder>();
+		//Order orders = new Order("2018-03-20", listS);
 	}
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
