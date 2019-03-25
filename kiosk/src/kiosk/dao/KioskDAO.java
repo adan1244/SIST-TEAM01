@@ -71,6 +71,18 @@ public class KioskDAO {
 		this.cart.getItem().get(index).setCount(count);
 	}
 	
+	public void addItem(Item item) {
+		this.item.add(item);
+	}
+	
+	public void deleteItem(String category, String itemName) {
+		for(Item i : item) {
+			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {
+				item.remove(i);
+			}
+		}
+	}
+	
 	// 이미 있는 품목의 가격을 변경하는 메소드
 	// 가격이 바뀌었을 때 이미 결제된 주문들의 품목까지 같이 바뀌지 않도록 삭제 후 재등록으로 진행
 	public void changePrice(String category, String itemName, int price) {
