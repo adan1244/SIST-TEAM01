@@ -1,6 +1,4 @@
 package kiosk.domain;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubOrder {
@@ -49,7 +47,7 @@ public class SubOrder {
 			tmp.concat(i.getName() + " ");
 		}
 		tmp.concat(this.count + " ");
-		tmp.concat(this.price + "");
+		tmp.concat(this.price + "원");
 		return tmp;
 	}
 }
