@@ -9,10 +9,10 @@ import java.time.LocalDate;
 import kiosk.domain.*;
 
 public class KioskDAO {
-	private List<Item> item;		// 판매 품목 저장
-	private List<Membership> mem;	// 포인트 적립 저장
-	private Order cart;				// 장바구니에 들어있는 품목 저장
-	private List<Order> order;		// 실제 결제된 주문들 저장
+	private List<Item> item = new ArrayList<Item>(); // 판매 품목 저장
+	private List<Membership> mem = new ArrayList<Membership>(); // 포인트 적립 저장
+	private Order cart = new Order(); // 장바구니에 들어있는 품목 저장
+	private List<Order> order = new ArrayList<Order>(); // 실제 결제된 주문들 저장
 	
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
@@ -68,7 +68,13 @@ public class KioskDAO {
 	
 	// 장바구니에서 삭제하기 실행하는 경우 해당 품목의 번호와 삭제할 수량을 입력받아 삭제
 	public void deleteFromCart(int index, int count) {
-		this.cart.getItem().get(index).setCount(count);
+		SubOrder so = this.cart.getItem().get(index);
+		if(so.getCount() == count) {
+			this.cart.getItem().remove(so);
+		}
+		else {
+			so.setCount(count);
+		}
 	}
 	
 	public void addItem(Item item) {
