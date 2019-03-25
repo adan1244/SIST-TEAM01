@@ -141,6 +141,7 @@ public class KioskDAO {
 		for(Item i : item) {
 			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {
 				item.remove(i);
+				return;
 			}
 		}
 	}
