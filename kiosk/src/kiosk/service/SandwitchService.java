@@ -22,7 +22,7 @@ public class SandwitchService {
 	public SandwitchService(KioskDAO dao) {
 		this.dao = dao;
 	}
-
+ 
 	// 메인메뉴 주문
 	public void menu1(Scanner sc) {
 		List<Item> item = new ArrayList<Item>();
