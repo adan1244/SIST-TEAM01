@@ -19,7 +19,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
  
 		while (true) {
-
+ 
 			System.out.println();
 			System.out.println("==================================");
 			System.out.println("      서브웨이 무인 주문기        ");

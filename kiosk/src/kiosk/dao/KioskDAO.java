@@ -82,7 +82,7 @@ public class KioskDAO {
 		for (Item i : item) {
 			if(i.getCategory().equals(category)) {
 				tmp.add(i);
-			}
+			} 
 		}
 		return tmp;
 	}

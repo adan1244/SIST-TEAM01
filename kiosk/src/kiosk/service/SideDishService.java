@@ -16,7 +16,7 @@ public class SideDishService {
 	// 기본생성자
 	public SideDishService() {
 
-	}
+	} 
 		public SideDishService(KioskDAO dao) {
 			this.dao = dao; 
 		}
