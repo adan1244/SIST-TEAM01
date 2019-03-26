@@ -165,7 +165,7 @@ public class SandwitchService {
 	}
 
 	// 소스선택
-	public List<Item> sauce(Scanner sc) {
+	public List<Item> sauce(Scanner sc) { 
 
 		List<Item> item = new ArrayList<Item>();
 		List<Item> sauces = new ArrayList<Item>();
