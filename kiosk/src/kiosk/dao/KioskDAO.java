@@ -59,7 +59,7 @@ public class KioskDAO {
 		
 		item = new Item("SI", "음료", 1000);
 		this.item.add(item);
-		item = new Item("SI", "음료 + 쿠키 세트", 1500);
+		item = new Item("SI", "음료&쿠키", 1500);
 		this.item.add(item);
 		item = new Item("SI", "쿠키", 1000);
 		this.item.add(item);
