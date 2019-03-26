@@ -63,14 +63,13 @@ public class SandwitchService {
 		System.out.println("           서브웨이 무인 주문기                ");
 		System.out.println("==================================");
 		System.out.println(" 품목번호  품목명   가격");
-		int number = 1;
 		item = this.dao.listItem("SA");
-		for (Item i : item) {
-			if (i != null) {
-				System.out.printf("%3d  %3s  %3s%n", number, i.getName(), i.getPrice());
-				++number;
-			}
+		int i;
+		for (i=0; i<item.size();++i) {
+			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
 		}
+
+		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.print("선택 : ");
 		int sandchoice = sc.nextInt();
@@ -92,12 +91,12 @@ public class SandwitchService {
 		System.out.println("==================================");
 		System.out.println("번호  이름");
 		item = this.dao.listItem("BR");
-		int number = 1;
-		for (Item i : item) {
-			System.out.printf("%3d  %3s  %3d%n", number, i.getName(), i.getPrice());
-			++number;
+		int i;
+		for (i=0; i<item.size();++i) {
+			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
 		}
 
+		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.print("선택 : ");
 		int breadchoice = sc.nextInt();
@@ -119,13 +118,12 @@ public class SandwitchService {
 		System.out.println("              야채선택                         ");
 		System.out.println("==================================");
 		item = this.dao.listItem("VE");
-		int number = 1;
-		for (Item i : item) {
-			System.out.printf("%3d  %3s  %3d%n", number, i.getName(), i.getPrice());
-			++number;
+		int i;
+		for (i=0; i<item.size();++i) {
+			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
 		}
 
-		System.out.println("6 선택완료");
+		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.println("야채의 번호를 선택해주세요");
 		System.out.print("선택 : ");
@@ -149,13 +147,12 @@ public class SandwitchService {
 		System.out.println("==================================");
 		System.out.println("번호  이름");
 		item = this.dao.listItem("SO");
-		int number = 1;
-		for (Item i : item) {
-
-			System.out.printf("%3d  %3s  %3d%n", number, i.getName(), i.getPrice());
-			++number;
+		int i;
+		for (i=0; i<item.size();++i) {
+			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
 		}
-		System.out.println("7 선택완료");
+
+		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.print("선택 : ");
 
