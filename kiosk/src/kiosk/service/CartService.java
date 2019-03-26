@@ -5,6 +5,7 @@ import java.util.Scanner;
 import kiosk.dao.*;
 import kiosk.domain.Membership;
 import kiosk.domain.Order;
+import kiosk.domain.SubOrder;
 import kiosk.main.Main;
 
 public class CartService {
@@ -33,16 +34,16 @@ public class CartService {
 			
 			Order order = dao.getCart();
 			for(int i = 0; i < order.getItem().size(); ++i) {
-				System.out.printf("%d %s %s ", i + 1, order.getItem().get(i), order.getItem().get(i).getCount());
+				System.out.printf("%d %s %n", i + 1, order.listSubOrders().get(i));
 			}
 			
 			System.out.println("----------------------------------");
 			
-			for(int i =0; i<order.getItem().size(); ++i) {
-				total += order.getItem().get(i).getPrice() * order.getItem().get(i).getCount(); 
-			}
+			SubOrder subOrder = new SubOrder(order.getItem().get(0).getItem(), order.getItem().get(0).getCount());
 			
-			System.out.printf("총 금액 : %d\n", total);
+			total = subOrder.getPrice();
+			
+			System.out.printf("총 금액 : %d원\n", total);
 			System.out.println("----------------------------------");
 			System.out.println("1. 결제하기");
 			System.out.println("2. 삭제하기");

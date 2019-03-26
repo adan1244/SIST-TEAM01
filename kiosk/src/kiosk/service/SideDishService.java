@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import kiosk.dao.KioskDAO;
 import kiosk.domain.Item;
-import kiosk.domain.Order;
 import kiosk.domain.SubOrder;
+import kiosk.main.Main;
 
 public class SideDishService {
 
@@ -59,13 +59,10 @@ public class SideDishService {
 				System.out.println("----------------------------------");
 				
 				if (m_ == 0)
+					Main.main(null);
 					break;
-			
 				}
-
-
 			}
-					
 		}
 
 
