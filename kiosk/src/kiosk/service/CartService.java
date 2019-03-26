@@ -54,8 +54,7 @@ public class CartService {
 			sc.nextLine();
 			
 			if(input == 0) {
-				Main.main(null);
-				break;
+				return;
 			} else if(input == 1) {
 				System.out.println();
 				System.out.println("뒤로가기 = 0");
@@ -131,8 +130,9 @@ public class CartService {
 					if(phoneNum.length() != 13) {
 						System.out.println("유효하지 않은 핸드폰 번호입니다.");
 					}else {
-						Membership membership = dao.getMembership(phoneNum);
 						int point = (int)(total * 0.1); 
+						Membership membership = dao.getMembership(phoneNum);
+						
 						dao.addPoint(membership, point);
 						
 						System.out.printf("총 %d원 결제되었습니다. %n", total);
@@ -239,7 +239,7 @@ public class CartService {
 		sc.nextLine();
 		
 		if(input2 == 1) {
-			dao.deleteFromCart(orderId, count);
+			dao.deleteFromCart(orderId - 1, count);
 			System.out.println("선택한 메뉴가 장바구니에서 삭제되었습니다.");
 		}else if(input2 == 0){
 			System.out.println("취소되었습니다.");
