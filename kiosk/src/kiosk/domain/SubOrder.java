@@ -30,7 +30,7 @@ public class SubOrder {
 		return price;
 	}
 	
-	public void calculatePrice() {
+	private void calculatePrice() {
 		int tmp = 0;
 		for (Item i : item) {
 			tmp += i.getPrice();
