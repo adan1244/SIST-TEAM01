@@ -36,22 +36,30 @@ public class SandwitchService {
 			return;
 		item.add(tempb);
 
-		Item tempv = this.vegetable(sc);
+		List<Item> tempv = this.vegetable(sc);
 		if (tempv == null)
 			return;
-		item.add(tempv);
+		for (Item i : tempv) {
+			item.add(i);
+		}
 
-		Item temps = this.sauce(sc);
+		List<Item> temps = this.sauce(sc);
 		if (temps == null)
 			return;
-		item.add(temps);
-		
-		System.out.println();
+		for(Item i : temps) {
+			item.add(i);
+		}
+
 		System.out.print("샌드위치 수량 : ");
 		int countchoice = sc.nextInt();
 		sc.nextLine();
-		SubOrder sub = new SubOrder(item , countchoice);
+		SubOrder sub = new SubOrder(item, countchoice);
 		this.dao.addToCart(sub);
+
+		List<String> carts = this.dao.getCart().listSubOrders();
+		for (int a = 0; a < carts.size(); ++a) {
+			System.out.printf("%d %s%n", a + 1, carts.get(a));
+		}
 	}
 
 	// 샌드위치 선택
@@ -65,11 +73,10 @@ public class SandwitchService {
 		System.out.println(" 품목번호  품목명   가격");
 		item = this.dao.listItem("SA");
 		int i;
-		for (i=0; i<item.size();++i) {
-			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
+		for (i = 0; i < item.size(); ++i) {
+			System.out.printf("%3d  %3s  %3d%n", i + 1, item.get(i).getName(), item.get(i).getPrice());
 		}
 
-		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.print("선택 : ");
 		int sandchoice = sc.nextInt();
@@ -92,11 +99,10 @@ public class SandwitchService {
 		System.out.println("번호  이름");
 		item = this.dao.listItem("BR");
 		int i;
-		for (i=0; i<item.size();++i) {
-			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
+		for (i = 0; i < item.size(); ++i) {
+			System.out.printf("%3d  %3s%n", i + 1, item.get(i).getName());
 		}
 
-		System.out.printf("%3d 선택완료%n",i+1);
 		System.out.println("----------------------------------");
 		System.out.print("선택 : ");
 		int breadchoice = sc.nextInt();
@@ -109,59 +115,99 @@ public class SandwitchService {
 	}
 
 	// 야채선택
-	public Item vegetable(Scanner sc) {
+	public List<Item> vegetable(Scanner sc) {
 		List<Item> item = new ArrayList<Item>();
-		Item items = new Item();
+		List<Item> vegetables = new ArrayList<Item>();
+		String vcheck = "V";
+		String vcheckx = "";
 
-		System.out.println("뒤로가기 = 0");
-		System.out.println("==================================");
-		System.out.println("              야채선택                         ");
-		System.out.println("==================================");
-		item = this.dao.listItem("VE");
-		int i;
-		for (i=0; i<item.size();++i) {
-			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
+		while (true) {
+			System.out.println("뒤로가기 = 0");
+			System.out.println("==================================");
+			System.out.println("              야채선택                         ");
+			System.out.println("==================================");
+			item = this.dao.listItem("VE");
+
+			int i;
+
+			for (i = 0; i < item.size(); ++i) {
+				if (vegetables.indexOf(item.get(i)) >= 0) {
+
+					System.out.printf("%3d  %3s  %3s%n", i + 1, item.get(i).getName(), vcheck);
+				} else {
+					System.out.printf("%3d  %3s  %3s%n", i + 1, item.get(i).getName(), vcheckx);
+				}
+			}
+
+			System.out.printf("%3d 선택완료%n", i + 1);
+			System.out.println("----------------------------------");
+			System.out.println("야채의 번호를 선택해주세요");
+			System.out.print("선택 : ");
+			int vegechoice = sc.nextInt();
+			sc.nextLine();
+			if (vegechoice == 0)
+				return null;
+			if (vegechoice == i + 1) {
+				return vegetables;
+
+			} else {
+				int idx = vegetables.indexOf(item.get(vegechoice - 1));
+				if (idx >= 0) {
+					vegetables.remove(idx);
+				} else {
+					vegetables.add(item.get(vegechoice - 1));
+				}
+			}
+			
 		}
+		
 
-		System.out.printf("%3d 선택완료%n",i+1);
-		System.out.println("----------------------------------");
-		System.out.println("야채의 번호를 선택해주세요");
-		System.out.print("선택 : ");
-		int vegechoice = sc.nextInt();
-		sc.nextLine();
-		if (vegechoice == 0)
-			return null;
-		items = item.get(vegechoice - 1);
-
-		return items;
 	}
 
 	// 소스선택
-	public Item sauce(Scanner sc) {
+	public List<Item> sauce(Scanner sc) {
+
 		List<Item> item = new ArrayList<Item>();
-		Item items = new Item();
-		
-		System.out.println("뒤로가기 = 0");
-		System.out.println("==================================");
-		System.out.println("              소스선택                         ");
-		System.out.println("==================================");
-		System.out.println("번호  이름");
-		item = this.dao.listItem("SO");
-		int i;
-		for (i=0; i<item.size();++i) {
-			System.out.printf("%3d  %3s  %3d%n", i+1, item.get(i).getName(), item.get(i).getPrice());
+		List<Item> sauces = new ArrayList<Item>();
+		String scheck = "V";
+		String scheckx = "";
+		while (true) {
+			System.out.println("뒤로가기 = 0");
+			System.out.println("==================================");
+			System.out.println("              소스선택                         ");
+			System.out.println("==================================");
+			System.out.println("번호  이름");
+			item = this.dao.listItem("SO");
+			int i;
+			for (i = 0; i < item.size(); ++i) {
+
+				if (sauces.indexOf(item.get(i)) >= 0) {
+					System.out.printf("%3d  %3s  %3s%n", i + 1, item.get(i).getName(), scheck);
+				} else {
+					System.out.printf("%3d  %3s  %3s%n", i + 1, item.get(i).getName(), scheckx);
+				}
+			}
+
+			System.out.printf("%3d 선택완료%n", i + 1);
+			System.out.println("----------------------------------");
+			System.out.print("선택 : ");
+
+			int saucechoice = sc.nextInt();
+			sc.nextLine();
+			if (saucechoice == 0)
+				return null;
+			if (saucechoice == i + 1) {
+				return sauces;
+
+			} else {
+				int idx = sauces.indexOf(item.get(saucechoice - 1));
+				if (idx >= 0) {
+					sauces.remove(idx);
+				} else {
+					sauces.add(item.get(saucechoice - 1));
+				}
+			}
 		}
 
-		System.out.printf("%3d 선택완료%n",i+1);
-		System.out.println("----------------------------------");
-		System.out.print("선택 : ");
-
-		int saucechoice = sc.nextInt();
-		sc.nextLine();
-		if (saucechoice == 0)
-			return null;
-		items = item.get(saucechoice-1);
-
-		return items;
 	}
 }
