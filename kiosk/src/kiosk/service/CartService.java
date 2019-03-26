@@ -42,7 +42,7 @@ public class CartService {
 				total += order.getItem().get(i).getPrice() * order.getItem().get(i).getCount(); 
 			}
 			
-			System.out.printf("총 금액 : %d", total);
+			System.out.printf("총 금액 : %d\n", total);
 			System.out.println("----------------------------------");
 			System.out.println("1. 결제하기");
 			System.out.println("2. 삭제하기");
