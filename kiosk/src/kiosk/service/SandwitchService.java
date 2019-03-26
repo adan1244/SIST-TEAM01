@@ -47,7 +47,7 @@ public class SandwitchService {
 		if (temps == null)
 			return;
 		for(Item i : temps) {
-			item.add(i);
+			item.add(i); 
 		}
 
 		System.out.print("샌드위치 수량 : ");
