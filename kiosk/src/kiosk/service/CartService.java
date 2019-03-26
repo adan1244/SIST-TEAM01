@@ -1,12 +1,12 @@
 package kiosk.service;
 
+import java.util.List;
 import java.util.Scanner;
 
-import kiosk.dao.*;
+import kiosk.dao.KioskDAO;
 import kiosk.domain.Membership;
 import kiosk.domain.Order;
 import kiosk.domain.SubOrder;
-import kiosk.main.Main;
 
 public class CartService {
 	private KioskDAO dao;
@@ -38,10 +38,10 @@ public class CartService {
 			}
 			
 			System.out.println("----------------------------------");
+			List<SubOrder> subOrder = order.getItem();
 			
-			for(int i = 0; i < order.getItem().size(); ++i) {
-				SubOrder subOrder = new SubOrder(order.getItem().get(i).getItem(), order.getItem().get(i).getCount());
-				total += subOrder.getPrice();
+			for(int i = 0; i < subOrder.size(); ++i) {
+				total += subOrder.get(i).getPrice();
 			}
 			
 			System.out.printf("총 금액 : %d원\n", total);
@@ -105,8 +105,7 @@ public class CartService {
 				System.out.println("유효하지 않은 카드 번호입니다.");
 			}else {
 				System.out.printf("총 %d원 결제되었습니다. %n", total);
-				int point = 0;
-				this.bill(point, total, usePoint);
+				this.bill(0, total, usePoint);
 				break;  
 			}
 		}
@@ -117,7 +116,7 @@ public class CartService {
 		
 		while(true) {
 			System.out.println();
-			System.out.print("카드   번호 : ");
+			System.out.print("카드 번호 : ");
 			String cardNum = sc.nextLine();
 			
 			if(cardNum.length() != 19) {
@@ -138,7 +137,7 @@ public class CartService {
 						System.out.printf("총 %d원 결제되었습니다. %n", total);
 						System.out.printf("%d 포인트 적립 %n", point);
 						
-						this.bill(membership.getPoint(), total, usePoint);
+						this.bill(point, total, usePoint);
 						break;
 					}
 				}
@@ -159,6 +158,7 @@ public class CartService {
 			if(phoneNum.length() != 13) {
 				System.out.println("유효하지 않은 핸드폰 번호입니다.");
 			}else {
+				System.out.println();
 				System.out.printf("적립된 포인트 %d원 %n", membership.getPoint());
 			}
 			while(true) {
@@ -172,7 +172,7 @@ public class CartService {
 					System.out.println("결제 금액을 초과하였습니다.");
 				}else {
 					dao.usePoint(membership, usePoint);
-					System.out.printf("남은 결제 금액 : %d %n", total - usePoint);
+					System.out.printf("남은 결제 금액 %d원 %n", total - usePoint);
 					break;
 				}
 			}
@@ -191,7 +191,7 @@ public class CartService {
 					System.out.println("유효하지 않은 카드 번호입니다.");
 				}else {
 					System.out.printf("총 %d원 결제되었습니다. %n", total);
-					this.bill(membership.getPoint(), total, usePoint);
+					this.bill(0, total, usePoint);
 					break;
 				}
 			}
@@ -213,10 +213,10 @@ public class CartService {
 			System.out.printf("%d %s %n", i + 1, order.listSubOrders().get(i));
 		}
 		System.out.println("----------------------------------");
-		System.out.printf("총    액 : %d %n", total);
+		System.out.printf("총    액 : %d원 %n", total);
 		System.out.printf("포인트 사용 : -%d %n", usePoint);
 		System.out.println("----------------------------------");
-		System.out.printf("결제금액 : %d %n", total - usePoint);
+		System.out.printf("결제금액 : %d원 %n", total - usePoint);
 		System.out.println("----------------------------------");
 		System.out.printf("적 립 금 : %d %n", point);	
 	}
