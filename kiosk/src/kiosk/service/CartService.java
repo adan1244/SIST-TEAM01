@@ -39,9 +39,10 @@ public class CartService {
 			
 			System.out.println("----------------------------------");
 			
-			SubOrder subOrder = new SubOrder(order.getItem().get(0).getItem(), order.getItem().get(0).getCount());
-			
-			total = subOrder.getPrice();
+			for(int i = 0; i < order.getItem().size(); ++i) {
+				SubOrder subOrder = new SubOrder(order.getItem().get(i).getItem(), order.getItem().get(i).getCount());
+				total += subOrder.getPrice();
+			}
 			
 			System.out.printf("총 금액 : %d원\n", total);
 			System.out.println("----------------------------------");
@@ -131,14 +132,13 @@ public class CartService {
 						System.out.println("유효하지 않은 핸드폰 번호입니다.");
 					}else {
 						Membership membership = dao.getMembership(phoneNum);
-						int point = (int)(total * 0.1) + membership.getPoint();
+						int point = (int)(total * 0.1); 
+						dao.addPoint(membership, point);
 						
 						System.out.printf("총 %d원 결제되었습니다. %n", total);
-						System.out.printf("%d 포인트 적립", point);
+						System.out.printf("%d 포인트 적립 %n", point);
 						
-						membership.setPoint(point);
-						this.bill(point, total, usePoint);
-						
+						this.bill(membership.getPoint(), total, usePoint);
 						break;
 					}
 				}
@@ -159,21 +159,30 @@ public class CartService {
 			if(phoneNum.length() != 13) {
 				System.out.println("유효하지 않은 핸드폰 번호입니다.");
 			}else {
-				System.out.printf("적립된 포인트 %d원", membership.getPoint());
-				System.out.println("사용할 포인트 : ");
+				System.out.printf("적립된 포인트 %d원 %n", membership.getPoint());
+			}
+			while(true) {
+				System.out.print("사용할 포인트 : ");
 				usePoint = sc.nextInt();
 				sc.nextLine();
 				
 				if(usePoint > membership.getPoint()) {
 					System.out.println("적립된 포인트 범위를 벗어났습니다.");
+				}else if(usePoint > total) {
+					System.out.println("결제 금액을 초과하였습니다.");
 				}else {
 					dao.usePoint(membership, usePoint);
-					System.out.printf("남은 결제 금액 : %d", total - usePoint);
+					System.out.printf("남은 결제 금액 : %d %n", total - usePoint);
 					break;
 				}
 			}
 			
 			while(true) {
+				if(total - usePoint == 0) {
+					this.bill(membership.getPoint(), total, usePoint);
+					break;
+				}
+				
 				System.out.println();
 				System.out.print("카드번호 : ");
 				String cardNum = sc.nextLine();
@@ -186,26 +195,30 @@ public class CartService {
 					break;
 				}
 			}
+			break;
 		}
 	}  
 	
 	//영수증 출력
 	private void bill(int point, int total, int usePoint) {
 		Order order = dao.getCart();
-		System.out.println("==============영수증===============");
-		System.out.printf("날    짜 : %s", order.getDate());
-		System.out.println("==================================");
-		for(int i = 0; i < order.getItem().size(); ++i) {
-			System.out.printf("%d %s %d", i+1, order.getItem().get(i).getItem().get(i).getName(), order.getItem().get(i).getCount());
-		}
+		dao.addToOrder();
 		System.out.println();
 		System.out.println("==================================");
-		System.out.printf("총    액 : %d", total);
-		System.out.printf("포인트 사용 : -%d", usePoint);
+		System.out.println("              영수증              ");
 		System.out.println("==================================");
-		System.out.printf("결제금액 : %d", total - usePoint);
-		System.out.println("==================================");
-		System.out.printf("적 립 금 : %d", point);	
+		System.out.printf("날    짜 : %s %n", order.getDate());
+		System.out.println("----------------------------------");
+		for(int i = 0; i < order.getItem().size(); ++i) {
+			System.out.printf("%d %s %n", i + 1, order.listSubOrders().get(i));
+		}
+		System.out.println("----------------------------------");
+		System.out.printf("총    액 : %d %n", total);
+		System.out.printf("포인트 사용 : -%d %n", usePoint);
+		System.out.println("----------------------------------");
+		System.out.printf("결제금액 : %d %n", total - usePoint);
+		System.out.println("----------------------------------");
+		System.out.printf("적 립 금 : %d %n", point);	
 	}
 	
 	//주문 삭제 메소드
