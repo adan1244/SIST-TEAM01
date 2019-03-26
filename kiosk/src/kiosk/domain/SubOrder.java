@@ -44,10 +44,10 @@ public class SubOrder {
 	public String toString() {
 		String tmp = new String();
 		for(Item i : item) {
-			tmp.concat(i.getName() + " ");
+			tmp = tmp.concat(i.getName() + " ");
 		}
-		tmp.concat(this.count + " ");
-		tmp.concat(this.price + "원");
+		tmp = tmp.concat(this.count + " ");
+		tmp = tmp.concat(this.price + "원");
 		return tmp;
 	}
 }
