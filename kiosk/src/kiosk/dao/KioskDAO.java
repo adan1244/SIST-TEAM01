@@ -59,7 +59,7 @@ public class KioskDAO {
 		
 		item = new Item("SI", "음료", 1000);
 		this.item.add(item);
-		item = new Item("SI", "음료 + 쿠키 세트", 1500);
+		item = new Item("SI", "음료&쿠키", 1500);
 		this.item.add(item);
 		item = new Item("SI", "쿠키", 1000);
 		this.item.add(item);
@@ -74,7 +74,7 @@ public class KioskDAO {
 		//SubOrder sub = new SubOrder();
 		//List<SubOrder> listS = new ArrayList<SubOrder>();
 		//Order orders = new Order("2018-03-20", listS);
-	}
+	} 
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
 	public List<Item> listItem(String category) {
@@ -82,7 +82,7 @@ public class KioskDAO {
 		for (Item i : item) {
 			if(i.getCategory().equals(category)) {
 				tmp.add(i);
-			}
+			} 
 		}
 		return tmp;
 	}

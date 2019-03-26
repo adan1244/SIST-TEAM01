@@ -3,28 +3,36 @@ package kiosk.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import kiosk.dao.KioskDAO;
+import kiosk.domain.Item;
+import kiosk.domain.Order;
+import kiosk.domain.SubOrder;
 
 public class SideDishService {
-		
-		/*private KioskDAO dao;
-		public SideDishService() {
-			this.dao = new  KioskDAO();
+
+	KioskDAO dao = null;
+
+	// 기본생성자
+	public SideDishService() {
+
+	} 
+		public SideDishService(KioskDAO dao) {
+			this.dao = dao; 
 		}
-		
 		public void menu2(Scanner sc) {
 			while (true) {
 
 				System.out.println();
 				System.out.println("==================================");
-				System.out.println("         사이드 선택");
+				System.out.println("           사이드 선택");
 				System.out.println("==================================");
-				System.out.println("번호     이름     가격");
-				List<Item> item = this.dao.listItem("sideDish");
+				System.out.println("번호          이름            가격");
+				List<Item> item = this.dao.listItem("SI");
 				int count = 1;
 				for (Item i : item) {
 					if (i != null) {
-						System.out.printf("%3d  %3s   %3s%n"
+						System.out.printf("%4d%12s%15s%n"
 								, count, i.getName()
 								, i.getPrice());
 						++count;
@@ -34,6 +42,8 @@ public class SideDishService {
 				System.out.print("선택:");
 				int m = sc.nextInt();
 				sc.nextLine();
+				if (m == 0)
+					break;
 				List<Item> temp = new ArrayList<Item>();
 				temp.add(item.get(m-1));
 				System.out.print("수량:");
@@ -41,18 +51,23 @@ public class SideDishService {
 				sc.nextLine();
 				
 				SubOrder s1 = new SubOrder(temp, m_);
-				this.dao.add(s1);
+				this.dao.addToCart(s1);
 				System.out.println("장바구니에 추가되었습니다.");
-
-				if (m == 0)
+				System.out.println("== 현재 장바구니에 추가된 메뉴 ===");
+				
+			
+				System.out.println("----------------------------------");
+				
+				if (m_ == 0)
 					break;
-
 			
 				}
 
+
 			}
-			*/		
+					
 		}
+
 
 
 
