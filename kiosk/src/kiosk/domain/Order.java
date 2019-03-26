@@ -7,11 +7,8 @@ public class Order {
 	private String date;
 	private List<SubOrder> item;
 	
-	public Order() {}
-	
-	public Order(String date, List<SubOrder> item) {
-		this.date = date;
-		this.item = item;
+	public Order() {
+		item = new ArrayList<SubOrder>();
 	}
 
 	public String getDate() {
