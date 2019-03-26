@@ -17,7 +17,7 @@ public class Main {
 		CartService cart = new CartService(dao);
 		AdminService admin = new AdminService(dao);
 		Scanner sc = new Scanner(System.in);
-
+ 
 		while (true) {
 
 			System.out.println();

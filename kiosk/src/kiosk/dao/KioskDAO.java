@@ -74,7 +74,7 @@ public class KioskDAO {
 		//SubOrder sub = new SubOrder();
 		//List<SubOrder> listS = new ArrayList<SubOrder>();
 		//Order orders = new Order("2018-03-20", listS);
-	}
+	} 
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
 	public List<Item> listItem(String category) {

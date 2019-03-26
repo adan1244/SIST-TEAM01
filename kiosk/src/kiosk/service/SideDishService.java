@@ -18,7 +18,7 @@ public class SideDishService {
 
 	}
 		public SideDishService(KioskDAO dao) {
-			this.dao = dao;
+			this.dao = dao; 
 		}
 		public void menu2(Scanner sc) {
 			while (true) {
