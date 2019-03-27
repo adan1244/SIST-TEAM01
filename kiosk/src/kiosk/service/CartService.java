@@ -8,6 +8,7 @@ import kiosk.domain.Membership;
 import kiosk.domain.Order;
 import kiosk.domain.SubOrder;
 
+// 삭제 후 수량이랑 가격 수정
 public class CartService {
 	private KioskDAO dao;
 	
@@ -33,22 +34,29 @@ public class CartService {
 			System.out.println("==================================");
 			
 			Order order = dao.getCart();
+			
 			for(int i = 0; i < order.getItem().size(); ++i) {
 				System.out.printf("%d %s %n", i + 1, order.listSubOrders().get(i));
 			}
 			
-			System.out.println("----------------------------------");
 			List<SubOrder> subOrder = order.getItem();
 			
 			for(int i = 0; i < subOrder.size(); ++i) {
 				total += subOrder.get(i).getPrice();
 			}
 			
-			System.out.printf("총 금액 : %d원\n", total);
-			System.out.println("----------------------------------");
-			System.out.println("1. 결제하기");
-			System.out.println("2. 삭제하기");
-			System.out.print("선택 : ");
+			if(total == 0) {
+				System.out.println("주문 내역이 없습니다.");
+				break;
+			} else {
+				System.out.println("----------------------------------");
+				System.out.printf("총 금액 : %d원\n", total);
+				System.out.println("----------------------------------");
+				System.out.println("1. 결제하기");
+				System.out.println("2. 삭제하기");
+				System.out.println("----------------------------------");
+				System.out.print("선택 : ");
+			}
 			
 			int input = sc.nextInt();
 			sc.nextLine();
@@ -62,7 +70,7 @@ public class CartService {
 				System.out.println("          결제 방법 선택          ");
 				System.out.println("==================================");
 				System.out.println("1. 일반 카드 결제");
-				System.out.println("2. 포인트 적립 + 결제");
+				System.out.println("2. 포인트 적립 결제");
 				System.out.println("3. 포인트 사용 결제");
 				System.out.println("----------------------------------");
 				System.out.print("선택 : ");
@@ -85,7 +93,6 @@ public class CartService {
 				}
 			} else if(input == 2) {
 				this.deleteOrder(sc);
-				break;
 			} else {
 				System.out.println("잘못된 입력입니다.");
 			}
@@ -223,28 +230,62 @@ public class CartService {
 	
 	//주문 삭제 메소드
 	private void deleteOrder(Scanner sc) {
-		System.out.println("삭제할 메뉴의 번호를 입력하세요.");
-		System.out.print("선택 : ");
-		int orderId = sc.nextInt();
-		sc.nextLine();
+		Order order = dao.getCart();
+		List<SubOrder> subOrder = order.getItem();
+		int orderId;
+		int count;
 		
-		System.out.println("삭제할 수량을 입력하세요.");
-		System.out.print("선택 : ");
-		int count = sc.nextInt();
-		sc.nextLine();
+		while(true) {
+			System.out.println();
+			System.out.println("삭제할 메뉴의 번호를 입력하세요.");
+			System.out.print("선택 : ");
+			orderId = sc.nextInt();
+			sc.nextLine();
+			
+			if(orderId > order.listSubOrders().size()) {
+				System.out.println();
+				System.out.println("메뉴 번호를 다시 확인해주세요.");
+			} else {
+				break;
+			}
+		}
 		
-		System.out.println("정말 삭제하시겠습니까? (YES : 1 / NO : 0)");
-		System.out.print("선택 : ");
-		int input2 = sc.nextInt();
-		sc.nextLine();
-		
-		if(input2 == 1) {
-			dao.deleteFromCart(orderId - 1, count);
-			System.out.println("선택한 메뉴가 장바구니에서 삭제되었습니다.");
-		}else if(input2 == 0){
-			System.out.println("취소되었습니다.");
-		}else {
-			System.out.println("잘못된 입력입니다.");
+		while(true) {
+			System.out.println();
+			System.out.println("삭제할 수량을 입력하세요.");
+			System.out.print("선택 : ");
+			count = sc.nextInt();
+			sc.nextLine();
+			
+			if(count > subOrder.get(orderId - 1).getCount()) {
+				System.out.println();
+				System.out.println("수량을 다시 확인해주세요");
+			} else {
+				break;
+			}
+		}
+					
+		while(true) {
+			System.out.println();
+			System.out.println("정말 삭제하시겠습니까? (YES : 1 / NO : 0)");
+			System.out.print("선택 : ");
+			int input2 = sc.nextInt();
+			sc.nextLine();
+							
+			if(input2 == 1) {
+				dao.deleteFromCart(orderId - 1, count);
+				System.out.println();
+				System.out.println("선택한 메뉴가 장바구니에서 삭제되었습니다.");
+				break;
+			}else if(input2 == 0){
+				System.out.println();
+				System.out.println("취소되었습니다.");
+				break;
+			}else {
+				System.out.println();
+				System.out.println("잘못된 입력입니다.");
+			}
 		}
 	}
 }
+
