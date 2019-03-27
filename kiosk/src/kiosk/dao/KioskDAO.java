@@ -15,65 +15,100 @@ public class KioskDAO {
 	private List<Order> order = new ArrayList<Order>(); // 실제 결제된 주문들 저장
 	
 	public KioskDAO() {
-		Item item = new Item("SA","에그마요",5000);
+		Item item = new Item("SA","에그마요",5000);//0
 		this.item.add(item);
-		item = new Item("SA","폴드포크",4000);
+		item = new Item("SA","폴드포크",4000);//1
 		this.item.add(item);
-		item = new Item("SA","터키",5500);
+		item = new Item("SA","터키",5500);//2
 		this.item.add(item);
-		item = new Item("SA","쉬림프",6000);
-		this.item.add(item);
-		
-		item = new Item("BR", "플랫", 0);
-		this.item.add(item);
-		item = new Item("BR", "화이트", 0);
-		this.item.add(item);
-		item = new Item("BR", "허니오트", 0);
-		this.item.add(item);
-		item = new Item("BR", "파마산", 0);
+		item = new Item("SA","쉬림프",6000);//3
 		this.item.add(item);
 		
-		item = new Item("VE", "피망", 0);
+		item = new Item("BR", "플랫", 0);//4
 		this.item.add(item);
-		item = new Item("VE", "양파", 0);
+		item = new Item("BR", "화이트", 0);//5
 		this.item.add(item);
-		item = new Item("VE", "올리브", 0);
+		item = new Item("BR", "허니오트", 0);//6
 		this.item.add(item);
-		item = new Item("VE", "할라피뇨", 0);
-		this.item.add(item);
-		item = new Item("VE", "양상추", 0);
+		item = new Item("BR", "파마산", 0);//7
 		this.item.add(item);
 		
-		item = new Item("SO", "핫칠리", 0);
+		item = new Item("VE", "피망", 0);//8
 		this.item.add(item);
-		item = new Item("SO", "랜치", 0);
+		item = new Item("VE", "양파", 0);//9
 		this.item.add(item);
-		item = new Item("SO", "스위트어니언", 0);
+		item = new Item("VE", "올리브", 0);//10
 		this.item.add(item);
-		item = new Item("SO", "스위트칠리", 0);
+		item = new Item("VE", "할라피뇨", 0);//11
 		this.item.add(item);
-		item = new Item("SO", "바베큐", 0);
-		this.item.add(item);
-		item = new Item("SO", "머스타드", 0);
+		item = new Item("VE", "양상추", 0);//12
 		this.item.add(item);
 		
-		item = new Item("SI", "음료", 1000);
+		item = new Item("SO", "핫칠리", 0);//13
 		this.item.add(item);
-		item = new Item("SI", "음료&쿠키", 1500);
+		item = new Item("SO", "랜치", 0);//14
 		this.item.add(item);
-		item = new Item("SI", "쿠키", 1000);
+		item = new Item("SO", "스위트어니언", 0);//15
 		this.item.add(item);
-		item = new Item("SI", "과자", 1000);
+		item = new Item("SO", "스위트칠리", 0);//16
 		this.item.add(item);
-		item = new Item("SI", "더블미트", 1500);
+		item = new Item("SO", "바베큐", 0);//17
 		this.item.add(item);
-		item = new Item("SI", "웨지감자", 3000);
+		item = new Item("SO", "머스타드", 0);//18
 		this.item.add(item);
 		
-		//List<Item> listL = new ArrayList<Item>();
-		//SubOrder sub = new SubOrder();
-		//List<SubOrder> listS = new ArrayList<SubOrder>();
-		//Order orders = new Order("2018-03-20", listS);
+		item = new Item("SI", "음료", 1000);//19
+		this.item.add(item);
+		item = new Item("SI", "음료&쿠키", 1500);//20
+		this.item.add(item);
+		item = new Item("SI", "쿠키", 1000);//21
+		this.item.add(item);
+		item = new Item("SI", "과자", 1000);//22
+		this.item.add(item);
+		item = new Item("SI", "더블미트", 1500);//23
+		this.item.add(item);
+		item = new Item("SI", "웨지감자", 3000);//24
+		this.item.add(item);
+		
+		List<Item> itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(1));
+		itemlist.add(this.item.get(5));
+		itemlist.add(this.item.get(8));
+		itemlist.add(this.item.get(13));
+		List<SubOrder> solist = new ArrayList<SubOrder>();
+		solist.add(new SubOrder(itemlist, 2));
+		Order o = new Order();
+		o.setItem(solist);
+		o.setDate("2019-03-26");
+		order.add(o);
+		itemlist = new ArrayList<Item>();
+		solist = new ArrayList<SubOrder>();
+		o = new Order();
+		itemlist.add(this.item.get(0));
+		itemlist.add(this.item.get(4));
+		itemlist.add(this.item.get(11));
+		itemlist.add(this.item.get(17));
+		solist.add(new SubOrder(itemlist, 3));
+		itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(22));
+		solist.add(new SubOrder(itemlist, 7));
+		o.setItem(solist);
+		o.setDate("2019-03-27");
+		order.add(o);
+		itemlist = new ArrayList<Item>();
+		solist = new ArrayList<SubOrder>();
+		o = new Order();
+		itemlist.add(this.item.get(0));
+		itemlist.add(this.item.get(4));
+		itemlist.add(this.item.get(11));
+		itemlist.add(this.item.get(17));
+		solist.add(new SubOrder(itemlist, 3));
+		itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(22));
+		solist.add(new SubOrder(itemlist, 7));
+		o.setItem(solist);
+		o.setDate("2019-02-26");
+		order.add(o);
 	} 
 	
 	// 카테고리를 매개변수로 받아 해당 카테고리에 해당하는 판매 품목들의 리스트를 반환
