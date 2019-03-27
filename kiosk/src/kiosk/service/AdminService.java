@@ -1,12 +1,12 @@
 package kiosk.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
+import java.util.Set;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import kiosk.dao.KioskDAO;
 import kiosk.domain.Item;
 import kiosk.domain.Order;
+import kiosk.domain.SubOrder;
 
 public class AdminService {
 	
@@ -252,67 +253,218 @@ public class AdminService {
 	
 	//99.관리자메뉴 - 2.일일결산 - 1.전일 결산
 	private void yesterday() {
-		String date = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
-		//Date dateY = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+		String date = LocalDate.now().minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE); 
 		List<Order> list = dao.listOrder(date);
-		int count = list.size();
+		List<Item> list3 = new ArrayList<Item>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", "start");
+		
+		int sum = 0;
+		boolean switch_ = false;
 		
 		System.out.println("----------------------------------");
-		System.out.printf("%s 주문 건수 %d", date, count);
+		System.out.printf("%s 주문 건수 %d", date, list.size());
 		System.out.println();
 		System.out.println("----------------------------------");
 		System.out.println("품목별 판매량");
-
-		for(int i = 0; i < count; ++i) {
-			System.out.printf("%s", list.get(i).listSubOrders());
+		
+		for(int i = 0; i < list.size(); ++i) {
+			List<SubOrder> sub = list.get(i).getItem();
+			for(int j = 0; j < sub.size(); ++j) {
+				List<Item> item = sub.get(j).getItem();
+				for(Item it : item) {
+					Set<String> keys = map.keySet();
+					Iterator<String> ite = keys.iterator();
+					while(ite.hasNext()) {
+						String key = ite.next();
+						if(map.get(it.getName()) == null) {
+							switch_ = true;
+							break;
+						}else if(it.getName() == key){
+							int count = Integer.parseInt(map.get(it.getName())) + sub.get(j).getCount();
+							map.replace(it.getName(), String.valueOf(count));
+						}	
+					}
+					if(switch_ == true) {
+						list3.add(it);
+						map.put(it.getName(), String.valueOf(sub.get(j).getCount()));
+						switch_ = false;
+					}
+				}
+			}
+		}
+		
+		for(Item i : list3) {
+			String name =  i.getName();
+			int count = Integer.parseInt(map.get(i.getName()));
+			int price = i.getPrice() * count;
+			sum += price;
+			System.out.printf("%s %s %s",name ,count ,price);
 			System.out.println();
 		}
+		
+		System.out.println("----------------------------------");
+		System.out.printf("총 매출액 %d원", sum);
+		System.out.println();
 	}
 	
 	//99.관리자메뉴 - 2.일일결산 - 2.금일 결산
 	private void today() {
 		String date = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE); 
 		List<Order> list = dao.listOrder(date);
-		int count = list.size();
+		List<Item> list3 = new ArrayList<Item>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", "start");
+		
+		int sum = 0;
+		boolean switch_ = false;
 		
 		System.out.println("----------------------------------");
-		System.out.printf("%s 주문 건수 %d", date, count);
+		System.out.printf("%s 주문 건수 %d", date, list.size());
 		System.out.println();
 		System.out.println("----------------------------------");
 		System.out.println("품목별 판매량");
 		
-		for(int i = 0; i < count; ++i) {
-			System.out.printf("%s", list.get(i).listSubOrders());
+		for(int i = 0; i < list.size(); ++i) {
+			List<SubOrder> sub = list.get(i).getItem();
+			for(int j = 0; j < sub.size(); ++j) {
+				List<Item> item = sub.get(j).getItem();
+				for(Item it : item) {
+					Set<String> keys = map.keySet();
+					Iterator<String> ite = keys.iterator();
+					while(ite.hasNext()) {
+						String key = ite.next();
+						if(map.get(it.getName()) == null) {
+							switch_ = true;
+							break;
+						}else if(it.getName() == key){
+							int count = Integer.parseInt(map.get(it.getName())) + sub.get(j).getCount();
+							map.replace(it.getName(), String.valueOf(count));
+						}	
+					}
+					if(switch_ == true) {
+						list3.add(it);
+						map.put(it.getName(), String.valueOf(sub.get(j).getCount()));
+						switch_ = false;
+					}
+				}
+			}
+		}
+		
+		for(Item i : list3) {
+			String name =  i.getName();
+			int count = Integer.parseInt(map.get(i.getName()));
+			int price = i.getPrice() * count;
+			sum += price;
+			System.out.printf("%s %s %s",name ,count ,price);
 			System.out.println();
 		}
+		
+		System.out.println("----------------------------------");
+		System.out.printf("총 매출액 %d원", sum);
+		System.out.println();
 	}
 	
 	//99.관리자메뉴 - 3.월말결산
 	private void monthly(Scanner sc) {
-		List<Order> list = null;
-		
 		while(true) {
+			Map<String, Integer> list = this.dao.listMonthly();
+			Map<Integer, String> list2 = new HashMap<Integer, String>();
+			Set<String> keys = list.keySet();
+			Iterator<String> ite = keys.iterator();
+			int count = 0;
+		
+		
 			System.out.println("뒤로가기  = 0");
 			System.out.println("==================================");
 			System.out.println("              월별 매출액                      ");
 			System.out.println("==================================");
-			//월별 매출액 리스트 
+			while(ite.hasNext()) {
+				String key = ite.next();
+				System.out.printf("%d %s %s",++count, key, list.get(key));
+				list2.put(count, key);
+				System.out.println();
+			}
 			System.out.println("----------------------------------");
 			System.out.print("선택 : ");
 			int choice = sc.nextInt();
 			sc.nextLine();
 			
+			
+			
+			
 			if(choice == 0) {
 				break;
 			}
 			else {
-				this.oneMonth(sc);
+				this.oneMonth(sc, list2.get(choice));
 			}
 		}
 	}
 	
 	//99.관리자메뉴 - 3.월말결산 - 선택한 달 결산
-	private void oneMonth(Scanner sc) {
+	private void oneMonth(Scanner sc, String date) {
+		List<Order> list = dao.listOrder(date);
+		List<Item> list3 = new ArrayList<Item>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", "start");
 		
+		int sum = 0;
+		boolean switch_ = false;
+		
+		System.out.println("----------------------------------");
+		System.out.printf("%s 주문 건수 %d", date, list.size());
+		System.out.println();
+		System.out.println("----------------------------------");
+		System.out.println("품목별 판매량");
+		
+		for(int i = 0; i < list.size(); ++i) {
+			List<SubOrder> sub = list.get(i).getItem();
+			for(int j = 0; j < sub.size(); ++j) {
+				List<Item> item = sub.get(j).getItem();
+				for(Item it : item) {
+					Set<String> keys = map.keySet();
+					Iterator<String> ite = keys.iterator();
+					while(ite.hasNext()) {
+						String key = ite.next();
+						if(map.get(it.getName()) == null) {
+							switch_ = true;
+							break;
+						}else if(it.getName() == key){
+							int count = Integer.parseInt(map.get(it.getName())) + sub.get(j).getCount();
+							map.replace(it.getName(), String.valueOf(count));
+						}	
+					}
+					if(switch_ == true) {
+						list3.add(it);
+						map.put(it.getName(), String.valueOf(sub.get(j).getCount()));
+						switch_ = false;
+					}
+				}
+			}
+		}
+		
+		for(Item i : list3) {
+			String name =  i.getName();
+			int count = Integer.parseInt(map.get(i.getName()));
+			int price = i.getPrice() * count;
+			sum += price;
+			System.out.printf("%s %s %s",name ,count ,price);
+			System.out.println();
+		}
+		
+		System.out.println("----------------------------------");
+		System.out.printf("총 매출액 %d원", sum);
+		System.out.println();
+		System.out.println();
+		System.out.println("이 달의 결산 내역을 삭제하시겠습니까?");
+		System.out.println("1.삭제 2.보관");
+		System.out.print("선택 : ");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		
+		if(choice == 1) {
+			this.dao.deleteOrder(date);
+		}
 	}
 }
