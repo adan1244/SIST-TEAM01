@@ -1,10 +1,15 @@
 package kiosk.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 import kiosk.dao.KioskDAO;
 import kiosk.domain.Item;
@@ -247,12 +252,39 @@ public class AdminService {
 	
 	//99.관리자메뉴 - 2.일일결산 - 1.전일 결산
 	private void yesterday() {
+		String date = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+		//Date dateY = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+		List<Order> list = dao.listOrder(date);
+		int count = list.size();
 		
+		System.out.println("----------------------------------");
+		System.out.printf("%s 주문 건수 %d", date, count);
+		System.out.println();
+		System.out.println("----------------------------------");
+		System.out.println("품목별 판매량");
+
+		for(int i = 0; i < count; ++i) {
+			System.out.printf("%s", list.get(i).listSubOrders());
+			System.out.println();
+		}
 	}
 	
 	//99.관리자메뉴 - 2.일일결산 - 2.금일 결산
 	private void today() {
+		String date = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE); 
+		List<Order> list = dao.listOrder(date);
+		int count = list.size();
 		
+		System.out.println("----------------------------------");
+		System.out.printf("%s 주문 건수 %d", date, count);
+		System.out.println();
+		System.out.println("----------------------------------");
+		System.out.println("품목별 판매량");
+		
+		for(int i = 0; i < count; ++i) {
+			System.out.printf("%s", list.get(i).listSubOrders());
+			System.out.println();
+		}
 	}
 	
 	//99.관리자메뉴 - 3.월말결산
