@@ -24,6 +24,7 @@ public class SubOrder {
 
 	public void setCount(int count) {
 		this.count = count;
+		this.calculatePrice();
 	}
 	
 	public int getPrice() {

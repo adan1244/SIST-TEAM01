@@ -134,7 +134,7 @@ public class KioskDAO {
 			this.cart.getItem().remove(so);
 		}
 		else {
-			so.setCount(count);
+			so.setCount(so.getCount() - count);
 		}
 	}
 	
