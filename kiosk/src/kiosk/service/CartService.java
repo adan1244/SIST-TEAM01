@@ -8,7 +8,6 @@ import kiosk.domain.Membership;
 import kiosk.domain.Order;
 import kiosk.domain.SubOrder;
 
-// 삭제 후 수량이랑 가격 수정
 public class CartService {
 	private KioskDAO dao;
 	
@@ -120,6 +119,8 @@ public class CartService {
 	
 	//포인트 적립 결제 
 	public void pay2(Scanner sc, int total, int usePoint) {
+		Membership membership;
+		int point; 
 		
 		while(true) {
 			System.out.println();
@@ -129,28 +130,31 @@ public class CartService {
 			if(cardNum.length() != 19) {
 				System.out.println("유효하지 않은 카드 번호입니다.");
 			}else {
-				while(true) {
-					System.out.print("핸드폰 번호 : ");
-					String phoneNum = sc.nextLine();
-					
-					if(phoneNum.length() != 13) {
-						System.out.println("유효하지 않은 핸드폰 번호입니다.");
-					}else {
-						int point = (int)(total * 0.1); 
-						Membership membership = dao.getMembership(phoneNum);
-						
-						dao.addPoint(membership, point);
-						
-						System.out.printf("총 %d원 결제되었습니다. %n", total);
-						System.out.printf("%d 포인트 적립 %n", point);
-						
-						this.bill(point, total, usePoint);
-						break;
-					}
-				}
 				break;
 			}
-		}	
+		}
+		
+		while(true) {
+			System.out.print("핸드폰 번호 : ");
+			String phoneNum = sc.nextLine();
+			
+			if(phoneNum.length() != 13) {
+				System.out.println();
+				System.out.println("유효하지 않은 핸드폰 번호입니다.");
+			}else {
+				point = (int)(total * 0.1); 
+				membership = dao.getMembership(phoneNum);
+				
+				dao.addPoint(membership, point);
+				
+				System.out.println();
+				System.out.printf("총 %d원 결제되었습니다. %n", total);
+				System.out.printf("%d 포인트 적립 %n", point);
+				
+				this.bill(point, total, usePoint);
+				break;
+			}
+		}
 	}
 	
 	//포인트 사용 결제
@@ -163,6 +167,7 @@ public class CartService {
 			Membership membership = dao.getMembership(phoneNum);
 			
 			if(phoneNum.length() != 13) {
+				System.out.println();
 				System.out.println("유효하지 않은 핸드폰 번호입니다.");
 			}else {
 				System.out.println();
@@ -174,11 +179,14 @@ public class CartService {
 				sc.nextLine();
 				
 				if(usePoint > membership.getPoint()) {
+					System.out.println();
 					System.out.println("적립된 포인트 범위를 벗어났습니다.");
 				}else if(usePoint > total) {
+					System.out.println();
 					System.out.println("결제 금액을 초과하였습니다.");
 				}else {
 					dao.usePoint(membership, usePoint);
+					System.out.println();
 					System.out.printf("남은 결제 금액 %d원 %n", total - usePoint);
 					break;
 				}
@@ -195,8 +203,10 @@ public class CartService {
 				String cardNum = sc.nextLine();
 				
 				if(cardNum.length() != 19) {
+					System.out.println();
 					System.out.println("유효하지 않은 카드 번호입니다.");
 				}else {
+					System.out.println();
 					System.out.printf("총 %d원 결제되었습니다. %n", total);
 					this.bill(0, total, usePoint);
 					break;
