@@ -177,7 +177,7 @@ public class KioskDAO {
 	// 월말결산 진행 후 삭제하기를 선택하는 경우 호출
 	// 특정 월에 해당하는 주문 내역을 검색해서 삭제
 	public void deleteOrder(String date) {
-		for(int i = order.size()-1; i >= 0; ++i) {
+		for(int i = order.size()-1; i >= 0; --i) {
 			if(order.get(i).getDate().contains(date)) {
 				order.remove(i);
 			}
