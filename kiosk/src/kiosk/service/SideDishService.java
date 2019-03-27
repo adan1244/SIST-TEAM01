@@ -67,7 +67,7 @@ public class SideDishService {
 					
 					System.out.println("장바구니에 추가되었습니다.");
 					System.out.println("");
-					System.out.println("== 현재 장바구니에 추가된 메뉴 ===");
+					System.out.println("===== 현재 장바구니에 추가된 메뉴 =====");
 					for (int i = 0; i < order.getItem().size(); ++i) {
 						System.out.printf("%d %s%n", i + 1, order.getItem().get(i));
 					}
