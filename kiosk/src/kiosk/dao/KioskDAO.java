@@ -14,6 +14,7 @@ public class KioskDAO {
 	private Order cart = new Order(); // 장바구니에 들어있는 품목 저장
 	private List<Order> order = new ArrayList<Order>(); // 실제 결제된 주문들 저장
 	
+	// 테스트를 위한 초기 데이터 설정을 위해 기본 생성자 정의
 	public KioskDAO() {
 		Item item = new Item("SA","에그마요",5000);//0
 		this.item.add(item);
@@ -89,7 +90,7 @@ public class KioskDAO {
 		itemlist.add(this.item.get(11));
 		itemlist.add(this.item.get(17));
 		solist.add(new SubOrder(itemlist, 3));
-		itemlist = new ArrayList<Item>();
+		itemlist = new ArrayList<Item>(); 
 		itemlist.add(this.item.get(22));
 		solist.add(new SubOrder(itemlist, 7));
 		o.setItem(solist);
@@ -108,6 +109,50 @@ public class KioskDAO {
 		solist.add(new SubOrder(itemlist, 7));
 		o.setItem(solist);
 		o.setDate("2019-02-26");
+		order.add(o);
+		itemlist = new ArrayList<Item>();
+		solist = new ArrayList<SubOrder>();
+		o = new Order();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.now();
+		itemlist.add(this.item.get(3));
+		itemlist.add(this.item.get(4));
+		itemlist.add(this.item.get(9));
+		itemlist.add(this.item.get(18));
+		solist.add(new SubOrder(itemlist, 6));
+		itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(21));
+		solist.add(new SubOrder(itemlist, 5));
+		o.setItem(solist);
+		o.setDate(dtf.format(date));
+		order.add(o);
+		itemlist = new ArrayList<Item>();
+		solist = new ArrayList<SubOrder>();
+		o = new Order();
+		itemlist.add(this.item.get(2));
+		itemlist.add(this.item.get(6));
+		itemlist.add(this.item.get(9));
+		itemlist.add(this.item.get(16));
+		solist.add(new SubOrder(itemlist, 11));
+		itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(24));
+		solist.add(new SubOrder(itemlist, 7));
+		o.setItem(solist);
+		o.setDate(dtf.format(date));
+		order.add(o);
+		itemlist = new ArrayList<Item>();
+		solist = new ArrayList<SubOrder>();
+		o = new Order();
+		itemlist.add(this.item.get(0));
+		itemlist.add(this.item.get(4));
+		itemlist.add(this.item.get(11));
+		itemlist.add(this.item.get(17));
+		solist.add(new SubOrder(itemlist, 3));
+		itemlist = new ArrayList<Item>();
+		itemlist.add(this.item.get(22));
+		solist.add(new SubOrder(itemlist, 7));
+		o.setItem(solist);
+		o.setDate(dtf.format(date));
 		order.add(o);
 	} 
 	
@@ -173,10 +218,12 @@ public class KioskDAO {
 		}
 	}
 	
+	// 판매 품목 추가
 	public void addItem(Item item) {
 		this.item.add(item);
 	}
 	
+	// 카테고리와 품목 이름을 매개변수로 받아 판매 품목 삭제
 	public void deleteItem(String category, String itemName) {
 		for(Item i : item) {
 			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {

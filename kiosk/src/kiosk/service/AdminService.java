@@ -45,13 +45,13 @@ public class AdminService {
 	public void menu99(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("             관리자 메뉴                       ");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("1. 메뉴 관리                                           ");
 			System.out.println("2. 일일 결산                                           ");
 			System.out.println("3. 월말 결산                                           ");
-			System.out.println("----------------------------------");
+			System.out.println("-----------------------------------");
 			System.out.print("선택 : ");
 			int choice = sc.nextInt();
 			sc.nextLine();
@@ -71,13 +71,13 @@ public class AdminService {
 	private void itemEdit(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("              메뉴 관리                        ");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("1. 신 메뉴 추가                                        ");
 			System.out.println("2. 기존 메뉴 삭제                                     ");
 			System.out.println("3. 기존 메뉴 가격 변경                               ");
-			System.out.println("----------------------------------");
+			System.out.println("-----------------------------------");
 			System.out.print("선택 : ");
 			int choice = sc.nextInt();
 			sc.nextLine();
@@ -245,12 +245,12 @@ public class AdminService {
 	private void daily(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("              일일 결산                        ");
-			System.out.println("==================================");
+			System.out.println("===================================");
 			System.out.println("1. 전일 결산                                           ");
 			System.out.println("2. 금일 결산                                           ");
-			System.out.println("----------------------------------");
+			System.out.println("-----------------------------------");
 			System.out.print("선택 : ");
 			int choice = sc.nextInt();
 			sc.nextLine();
@@ -276,10 +276,10 @@ public class AdminService {
 		int sum = 0;
 		boolean switch_ = false;
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("%s 주문 건수 %d", date, list.size());
 		System.out.println();
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.println("품목별 판매량");
 		
 		for(int i = 0; i < list.size(); ++i) {
@@ -317,7 +317,7 @@ public class AdminService {
 			System.out.println();
 		}
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("총 매출액 %d원", sum);
 		System.out.println();
 	}
@@ -334,10 +334,10 @@ public class AdminService {
 		int sum = 0;
 		boolean switch_ = false;
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("%s 주문 건수 %d", date, list.size());
 		System.out.println();
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.println("품목별 판매량");
 		
 		for(int i = 0; i < list.size(); ++i) {
@@ -375,7 +375,7 @@ public class AdminService {
 			System.out.println();
 		}
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("총 매출액 %d원", sum);
 		System.out.println();
 	}
@@ -392,16 +392,16 @@ public class AdminService {
 		
 		
 			System.out.println("뒤로가기  = 0");
-			System.out.println("==================================");
-			System.out.println("              월별 매출액                      ");
-			System.out.println("==================================");
+			System.out.println("===================================");
+			System.out.println("            월별 매출액                      ");
+			System.out.println("===================================");
 			while(ite.hasNext()) {
 				String key = ite.next();
 				System.out.printf("%d %s %s",++count, key, list.get(key));
 				list2.put(count, key);
 				System.out.println();
 			}
-			System.out.println("----------------------------------");
+			System.out.println("-----------------------------------");
 			System.out.print("선택 : ");
 			int choice = sc.nextInt();
 			sc.nextLine();
@@ -429,10 +429,10 @@ public class AdminService {
 		int sum = 0;
 		boolean switch_ = false;
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("%s 주문 건수 %d", date, list.size());
 		System.out.println();
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.println("품목별 판매량");
 		
 		for(int i = 0; i < list.size(); ++i) {
@@ -470,7 +470,7 @@ public class AdminService {
 			System.out.println();
 		}
 		
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("총 매출액 %d원", sum);
 		System.out.println();
 		System.out.println();
