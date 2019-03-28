@@ -15,10 +15,6 @@ public class Membership {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public int getPoint() {
 		return point;
 	}

@@ -100,7 +100,7 @@ public class CartService {
 	
 	
 	//일반 카드 결제
-	public void pay1(Scanner sc, int total, int usePoint) {
+	private void pay1(Scanner sc, int total, int usePoint) {
 		
 		while(true) {
 			System.out.println();
@@ -118,7 +118,7 @@ public class CartService {
 	}
 	
 	//포인트 적립 결제 
-	public void pay2(Scanner sc, int total, int usePoint) {
+	private void pay2(Scanner sc, int total, int usePoint) {
 		Membership membership;
 		int point; 
 		
@@ -158,7 +158,7 @@ public class CartService {
 	}
 	
 	//포인트 사용 결제
-	public void pay3(Scanner sc, int total, int usePoint) {
+	private void pay3(Scanner sc, int total, int usePoint) {
 		
 		while(true) {
 			System.out.println();

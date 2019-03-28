@@ -11,7 +11,7 @@ import kiosk.dao.KioskDAO;
 
 public class SandwitchService {
 
-	KioskDAO dao = null;
+	private KioskDAO dao = null;
 
 	// 기본생성자
 	public SandwitchService() {
@@ -63,7 +63,7 @@ public class SandwitchService {
 	}
 
 	// 샌드위치 선택
-	public Item sandwitch(Scanner sc) {
+	private Item sandwitch(Scanner sc) {
 		List<Item> item = new ArrayList<Item>();
 		Item items = new Item();
 		System.out.println("뒤로가기 = 0");
@@ -88,7 +88,7 @@ public class SandwitchService {
 		return items;
 	}
 
-	public Item bread(Scanner sc) {
+	private Item bread(Scanner sc) {
 		List<Item> item = new ArrayList<Item>();
 		Item items = new Item();
 
@@ -115,7 +115,7 @@ public class SandwitchService {
 	}
 
 	// 야채선택
-	public List<Item> vegetable(Scanner sc) {
+	private List<Item> vegetable(Scanner sc) {
 		List<Item> item = new ArrayList<Item>();
 		List<Item> vegetables = new ArrayList<Item>();
 		String vcheck = "V";
@@ -165,7 +165,7 @@ public class SandwitchService {
 	}
 
 	// 소스선택
-	public List<Item> sauce(Scanner sc) { 
+	private List<Item> sauce(Scanner sc) { 
 
 		List<Item> item = new ArrayList<Item>();
 		List<Item> sauces = new ArrayList<Item>();
