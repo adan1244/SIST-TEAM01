@@ -33,6 +33,7 @@ public class CartService {
 			System.out.println("===================================");
 			
 			//장바구니에 저장된 내역 출력
+			//oredr.listSubOrder()를 이용해 List<String>을 반환받아 출력
 			Order order = dao.getCart();
 			
 			for(int i = 0; i < order.getItem().size(); ++i) {
@@ -271,6 +272,8 @@ public class CartService {
 			orderId = sc.nextInt();
 			sc.nextLine();
 			
+			//List<String>(주문내역)의 개수를 초과하지 않도록 확인
+			//0을 입력할 경우 menu3으로 돌아감
 			if(orderId > order.listSubOrders().size()) {
 				System.out.println();
 				System.out.println("메뉴 번호를 다시 확인해주세요.");
@@ -287,6 +290,8 @@ public class CartService {
 			count = sc.nextInt();
 			sc.nextLine();
 			
+			//특정 메뉴의 개수를 초과하지 않도록 확인
+			//0을 입력할 경우 menu3으로 돌아감
 			if(count > subOrder.get(orderId - 1).getCount()) {
 				System.out.println();
 				System.out.println("수량을 다시 확인해주세요");
@@ -305,6 +310,7 @@ public class CartService {
 			sc.nextLine();
 							
 			if(input2 == 1) {
+				//장바구니에 저장된 내역 삭제
 				dao.deleteFromCart(orderId - 1, count);
 				System.out.println();
 				System.out.println("선택한 메뉴가 장바구니에서 삭제되었습니다.");
