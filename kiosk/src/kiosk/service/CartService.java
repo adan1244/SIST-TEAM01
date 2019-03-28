@@ -28,9 +28,9 @@ public class CartService {
 			
 			System.out.println();
 			System.out.println("뒤로가기 = 0");
-			System.out.println("==================================");
-			System.out.println("          장바구니 (결제)"         );
-			System.out.println("==================================");
+			System.out.println("===================================");
+			System.out.println("           장바구니 (결제)"         );
+			System.out.println("===================================");
 			
 			Order order = dao.getCart();
 			
@@ -48,12 +48,12 @@ public class CartService {
 				System.out.println("주문 내역이 없습니다.");
 				break;
 			} else {
-				System.out.println("----------------------------------");
+				System.out.println("-----------------------------------");
 				System.out.printf("총 금액 : %d원\n", total);
-				System.out.println("----------------------------------");
+				System.out.println("-----------------------------------");
 				System.out.println("1. 결제하기");
 				System.out.println("2. 삭제하기");
-				System.out.println("----------------------------------");
+				System.out.println("-----------------------------------");
 				System.out.print("선택 : ");
 			}
 			
@@ -65,13 +65,13 @@ public class CartService {
 			} else if(input == 1) {
 				System.out.println();
 				System.out.println("뒤로가기 = 0");
-				System.out.println("==================================");
-				System.out.println("          결제 방법 선택          ");
-				System.out.println("==================================");
+				System.out.println("===================================");
+				System.out.println("           결제 방법 선택          ");
+				System.out.println("===================================");
 				System.out.println("1. 일반 카드 결제");
 				System.out.println("2. 포인트 적립 결제");
 				System.out.println("3. 포인트 사용 결제");
-				System.out.println("----------------------------------");
+				System.out.println("-----------------------------------");
 				System.out.print("선택 : ");
 				int payInput = sc.nextInt();
 				sc.nextLine();
@@ -104,7 +104,7 @@ public class CartService {
 		
 		while(true) {
 			System.out.println();
-			System.out.print("카드번호 : ");
+			System.out.println("카드번호 (0000 0000 0000 0000): ");
 			String cardNum = sc.nextLine();
 			
 			if(cardNum.length() != 19) {
@@ -124,7 +124,7 @@ public class CartService {
 		
 		while(true) {
 			System.out.println();
-			System.out.print("카드 번호 : ");
+			System.out.println("카드번호 (0000 0000 0000 0000): ");
 			String cardNum = sc.nextLine();
 			
 			if(cardNum.length() != 19) {
@@ -135,7 +135,7 @@ public class CartService {
 		}
 		
 		while(true) {
-			System.out.print("핸드폰 번호 : ");
+			System.out.println("핸드폰 번호 (000 0000 0000): ");
 			String phoneNum = sc.nextLine();
 			
 			if(phoneNum.length() != 13) {
@@ -162,7 +162,7 @@ public class CartService {
 		
 		while(true) {
 			System.out.println();
-			System.out.print("핸드폰 번호 : ");
+			System.out.println("핸드폰 번호 (000 0000 0000): ");
 			String phoneNum = sc.nextLine();
 			Membership membership = dao.getMembership(phoneNum);
 			
@@ -194,12 +194,12 @@ public class CartService {
 			
 			while(true) {
 				if(total - usePoint == 0) {
-					this.bill(membership.getPoint(), total, usePoint);
+					this.bill(0, total, usePoint);
 					break;
 				}
 				
 				System.out.println();
-				System.out.print("카드번호 : ");
+				System.out.println("카드번호 (0000 0000 0000 0000): ");
 				String cardNum = sc.nextLine();
 				
 				if(cardNum.length() != 19) {
@@ -221,20 +221,20 @@ public class CartService {
 		Order order = dao.getCart();
 		dao.addToOrder();
 		System.out.println();
-		System.out.println("==================================");
-		System.out.println("              영수증              ");
-		System.out.println("==================================");
+		System.out.println("===================================");
+		System.out.println("               영수증              ");
+		System.out.println("===================================");
 		System.out.printf("날    짜 : %s %n", order.getDate());
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		for(int i = 0; i < order.getItem().size(); ++i) {
 			System.out.printf("%d %s %n", i + 1, order.listSubOrders().get(i));
 		}
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("총    액 : %d원 %n", total);
 		System.out.printf("포인트 사용 : -%d %n", usePoint);
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("결제금액 : %d원 %n", total - usePoint);
-		System.out.println("----------------------------------");
+		System.out.println("-----------------------------------");
 		System.out.printf("적 립 금 : %d %n", point);	
 	}
 	

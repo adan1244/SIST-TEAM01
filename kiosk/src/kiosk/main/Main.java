@@ -21,14 +21,14 @@ public class Main {
 		while (true) {
  
 			System.out.println();
-			System.out.println("==================================");
-			System.out.println("      서브웨이 무인 주문기        ");
-			System.out.println("==================================");
+			System.out.println("===================================");
+			System.out.println("        서브웨이 무인 주문기       ");
+			System.out.println("===================================");
 			System.out.println("1 샌드위치 주문");
 			System.out.println("2 사이드 주문 ");
 			System.out.println("3 장바구니(결제)");
-			System.out.println("----------------------------------");
-			System.out.print("선택:");
+			System.out.println("-----------------------------------");
+			System.out.print("선택 : ");
 			int m = sc.nextInt();
 			sc.nextLine();
 

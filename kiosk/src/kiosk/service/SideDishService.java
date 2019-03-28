@@ -30,10 +30,10 @@ public class SideDishService {
 
 			System.out.println();
 			System.out.println("뒤로 가기 = 0");
-			System.out.println("==================================");
-			System.out.println("           사이드 선택");
-			System.out.println("==================================");
-			System.out.println("번호          이름            가격");
+			System.out.println("===================================");
+			System.out.println("            사이드 선택"            );
+			System.out.println("===================================");
+			System.out.println("번호          이름             가격");
 
 			for (Item i : item) {
 				if (i != null) {
@@ -42,7 +42,7 @@ public class SideDishService {
 				}
 			}
 			
-			System.out.println("----------------------------------");
+			System.out.println("-----------------------------------");
 			System.out.print("선택:");
 			int m = sc.nextInt();
 			sc.nextLine();
@@ -67,12 +67,12 @@ public class SideDishService {
 					
 					System.out.println("장바구니에 추가되었습니다.");
 					System.out.println("");
-					System.out.println("===== 현재 장바구니에 추가된 메뉴 =====");
+					System.out.println("--- 현재 장바구니에 추가된 메뉴 ---");
 					for (int i = 0; i < order.getItem().size(); ++i) {
 						System.out.printf("%d %s%n", i + 1, order.getItem().get(i));
 					}
 
-					System.out.println("----------------------------------");
+					System.out.println("-----------------------------------");
 					return;
 				}
 			}
