@@ -14,6 +14,7 @@ public class KioskDAO {
 	private Order cart = new Order(); // 장바구니에 들어있는 품목 저장
 	private List<Order> order = new ArrayList<Order>(); // 실제 결제된 주문들 저장
 	
+	// 테스트를 위한 초기 데이터 설정을 위해 기본 생성자 정의
 	public KioskDAO() {
 		Item item = new Item("SA","에그마요",5000);//0
 		this.item.add(item);
@@ -217,10 +218,12 @@ public class KioskDAO {
 		}
 	}
 	
+	// 판매 품목 추가
 	public void addItem(Item item) {
 		this.item.add(item);
 	}
 	
+	// 카테고리와 품목 이름을 매개변수로 받아 판매 품목 삭제
 	public void deleteItem(String category, String itemName) {
 		for(Item i : item) {
 			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {
