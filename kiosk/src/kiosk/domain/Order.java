@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-	private String date;
-	private List<SubOrder> item;
+	private String date; // 주문 결제 완료된 날짜
+	private List<SubOrder> item; // 서브 주문 리스트 (샌드위치, 쿠키, 웨지감자 ...)
 	
 	// 기본 생성자
 	public Order() {

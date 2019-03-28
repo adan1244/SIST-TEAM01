@@ -1,9 +1,9 @@
 package kiosk.domain;
 
 public class Item {
-	private String category;
-	private String name;
-	private int price;
+	private String category; // 카테고리 이름
+	private String name; // 품목 이름
+	private int price; // 품목 가격
 	
 	// 기본생성자
 	public Item() {}

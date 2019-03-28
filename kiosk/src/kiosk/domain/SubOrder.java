@@ -2,9 +2,9 @@ package kiosk.domain;
 import java.util.List;
 
 public class SubOrder {
-	private List<Item> item;
-	private int count;
-	private int price;
+	private List<Item> item; // 주문 품목 리스트 (샌드위치, 빵, 야채, 소스.. 또는 사이드)
+	private int count; // 주문 수량
+	private int price; // 전체 가격
 	
 	// 기본생성자
 	public SubOrder() {}

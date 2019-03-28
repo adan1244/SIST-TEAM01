@@ -1,8 +1,8 @@
 package kiosk.domain;
 
 public class Membership {
-	private String phone;
-	private int point;
+	private String phone; // 고객의 핸드폰 번호
+	private int point; // 적립된 포인트
 	
 	// 기본생성자
 	public Membership() {}
