@@ -237,7 +237,7 @@ public class KioskDAO {
 	// 가격이 바뀌었을 때 이미 결제된 주문들의 품목까지 같이 바뀌지 않도록 삭제 후 재등록으로 진행
 	public void changePrice(String category, String itemName, int price) {
 		for(Item i : item) {
-			if(i.getName().equals(itemName)) {
+			if(i.getCategory().equals(category) && i.getName().equals(itemName)) {
 				int index = item.indexOf(i);
 				item.remove(index);
 				item.add(new Item(category, itemName, price));
