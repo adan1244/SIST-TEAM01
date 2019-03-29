@@ -94,7 +94,7 @@ public class KioskDAO {
 		itemlist.add(this.item.get(22));
 		solist.add(new SubOrder(itemlist, 7));
 		o.setItem(solist);
-		o.setDate("2019-03-27");
+		o.setDate("2019-03-28");
 		order.add(o);
 		itemlist = new ArrayList<Item>();
 		solist = new ArrayList<SubOrder>();
