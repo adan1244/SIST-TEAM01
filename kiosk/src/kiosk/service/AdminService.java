@@ -27,6 +27,7 @@ public class AdminService {
 	}
 	
 	//dao, pwd 초기화 생성자
+	//저장소 및 비밀번호 지정 생성자
 	public AdminService(KioskDAO dao) {
 		this.dao = dao;
 		this.pwd = "123456";
@@ -34,11 +35,13 @@ public class AdminService {
 
 	
 	//관리자 로그인 암호 
+	//입력받은 비밀번호의 확인을 위해 비밀번호를 반환하는 메소드
 	public String getpwd() {
 		return this.pwd;
 	}
 	
 	//99.관리자 메뉴
+	//관리자 메뉴들에 접근하기 위한 메소드
 	public void menu99(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
@@ -64,6 +67,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리
+	//판매하는 메뉴들의 추가, 수정(가격), 삭제에 접근하기 위한 메소드
 	private void itemEdit(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
@@ -89,6 +93,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 1.신 메뉴 추가
+	//신 메뉴 추가를 위한 메소드
 	private void itemAdd(Scanner sc) {
 		List<Item> tmp = null;
 		Item item = null;
@@ -134,6 +139,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 2.기존 메뉴 삭제
+	//기존 메뉴 삭제를 위한 메소드
 	private void itemDelete(Scanner sc) {
 		List<Item> tmp = null;
 		int category = 0;
@@ -172,6 +178,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 1.메뉴 관리 - 3.기존 메뉴 가격 변경
+	//기존 메뉴의 가격을 수정하기 위한 메소드
 	private void changeItemPrice(Scanner sc) {
 		List<Item> tmp = null;
 		Map<String, String> remember1 = new HashMap<String, String>();
@@ -231,11 +238,10 @@ public class AdminService {
 			remember1.clear();
 			remember2.clear();
 		}
-		
-		
 	}
 	
 	//99.관리자메뉴 - 2.일일결산
+	//금일 및 전일 결산에 접근하기 위한 메소드
 	private void daily(Scanner sc) {
 		while(true) {
 			System.out.println("뒤로가기  = 0");
@@ -259,6 +265,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 2.일일결산 - 1.전일 결산
+	//전일 결산을 위한 메소드
 	private void yesterday() {
 		String date = LocalDate.now().minusDays(1).format(DateTimeFormatter.ISO_LOCAL_DATE); 
 		List<Order> list = dao.listOrder(date);
@@ -316,6 +323,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 2.일일결산 - 2.금일 결산
+	//금일 결산을 위한 메소드
 	private void today() {
 		String date = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE); 
 		List<Order> list = dao.listOrder(date);
@@ -373,6 +381,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 3.월말결산
+	//월말 결산할 달을 선택하기 위한 메소드
 	private void monthly(Scanner sc) {
 		while(true) {
 			Map<String, Integer> list = this.dao.listMonthly();
@@ -410,6 +419,7 @@ public class AdminService {
 	}
 	
 	//99.관리자메뉴 - 3.월말결산 - 선택한 달 결산
+	//월말 결산을 하기 위한 메소드
 	private void oneMonth(Scanner sc, String date) {
 		List<Order> list = dao.listOrder(date);
 		List<Item> list3 = new ArrayList<Item>();
